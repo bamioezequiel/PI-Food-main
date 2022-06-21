@@ -30,7 +30,9 @@ router.get('/', async (req, res) => {
 router.get('/:idReceta', async (req, res) => {
     let { idReceta } = req.params;
     try {
-        res.json(await getRecipeById(idReceta));
+        const recipe = await getRecipeById(idReceta);
+        if(!recipe) { throw Error('No se encontro la receta.'); }
+        res.json(recipe);
     } catch(error) {
         res.status(404).json( { error: error.message } );
     }
@@ -51,7 +53,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-/* router.post('/', async (req, res) => {
+/* 
+router.post('/', async (req, res) => {
     let { name, summary, healthScore, steps, diets } = req.body;
     try {
         if(!name || !summary) { throw Error('No hay parametros suficientes para hacer esta petición'); };
@@ -63,5 +66,5 @@ router.post('/', async (req, res) => {
         res.status(404).json( { error: error.message } );
     }
 });
- */
+*/
 

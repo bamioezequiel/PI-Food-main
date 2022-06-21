@@ -47,7 +47,7 @@ const getAllRecipes = async () => {
 
 const getRecipeById = async (id) => {
     let allInfo = await getAllRecipes();
-    return await allInfo.filter( (el) => el.id == id );;
+    return await allInfo.filter( (el) => el.id == id );
 }
 
 const postRecipe = async ({name, summary, healthScore, steps, diets}) => {
