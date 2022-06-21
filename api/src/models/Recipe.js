@@ -23,6 +23,9 @@ module.exports = (sequelize) => {
     steps: {
       type: DataTypes.STRING
     },
+    image: {
+      type: DataTypes.STRING
+    },
     createInDB: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

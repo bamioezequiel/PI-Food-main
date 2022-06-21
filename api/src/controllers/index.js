@@ -14,6 +14,7 @@ const getApiRecipes = async (amount = 10) => {
             summary:        el.summary.replace( /(<([^>]+)>)/ig, ''), 
             healthScore:    el.healthScore, 
             steps:          el.analyzedInstructions[0]?.steps.map( (el) => el.step ),
+            image:          el.image,
             diets:          el.diets.map( (el) => el )
         };
     });
@@ -50,13 +51,14 @@ const getRecipeById = async (id) => {
     return await allInfo.filter( (el) => el.id == id );
 }
 
-const postRecipe = async ({name, summary, healthScore, steps, diets}) => {
+const postRecipe = async ({name, summary, healthScore, steps, image, diets}) => {
     let [recipe, row] = await Recipe.findOrCreate({
         where: {
             name,
             summary,
             healthScore,
             steps,
+            image
         }
     });
     if(!row) { return [undefined, row] };

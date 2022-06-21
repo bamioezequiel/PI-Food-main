@@ -39,10 +39,10 @@ router.get('/:idReceta', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    let { name, summary, healthScore, steps, diets } = req.body;
+    let { name, summary, healthScore, steps, image, diets } = req.body;
     try {
         if(!name || !summary) { throw Error('No hay parametros suficientes para hacer esta petición'); };
-        postRecipe({ name, summary, healthScore, steps, diets })
+        postRecipe({ name, summary, healthScore, steps, image, diets })
             .then( ([recipe, row]) => {
                 if(!row) { throw Error('La receta ya existe.'); }
 
