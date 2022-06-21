@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { Recipe } = require('./../db.js'); 
-const { getAllRecipes, getApiRecipeById, postRecipe } = require('./../controllers/index.js');
+const { getAllRecipes, getRecipeById, postRecipe } = require('./../controllers/index.js');
 const router = Router();
 
 module.exports = router;
@@ -30,13 +30,28 @@ router.get('/', async (req, res) => {
 router.get('/:idReceta', async (req, res) => {
     let { idReceta } = req.params;
     try {
-        res.json(await getApiRecipeById(idReceta));
+        res.json(await getRecipeById(idReceta));
     } catch(error) {
         res.status(404).json( { error: error.message } );
     }
 });
 
 router.post('/', async (req, res) => {
+    let { name, summary, healthScore, steps, diets } = req.body;
+    try {
+        if(!name || !summary) { throw Error('No hay parametros suficientes para hacer esta petición'); };
+        postRecipe({ name, summary, healthScore, steps, diets })
+            .then( ([recipe, row]) => {
+                if(!row) { throw Error('La receta ya existe.'); }
+
+                res.status(201).json(recipe);
+            })
+    } catch (error) {
+        res.status(404).json( { error: error.message } );
+    }
+});
+
+/* router.post('/', async (req, res) => {
     let { name, summary, healthScore, steps, diets } = req.body;
     try {
         if(!name || !summary) { throw Error('No hay parametros suficientes para hacer esta petición'); };
@@ -48,5 +63,5 @@ router.post('/', async (req, res) => {
         res.status(404).json( { error: error.message } );
     }
 });
-
+ */
 

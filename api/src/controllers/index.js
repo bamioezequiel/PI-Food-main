@@ -45,7 +45,7 @@ const getAllRecipes = async () => {
     return apiInfo.concat(dbInfo);
 }
 
-const getApiRecipeById = async (id) => {
+const getRecipeById = async (id) => {
     let allInfo = await getAllRecipes();
     return await allInfo.filter( (el) => el.id == id );;
 }
@@ -100,7 +100,7 @@ module.exports = {
    getApiRecipes,
    getBDRecipes,
    getAllRecipes,
-   getApiRecipeById,
+   getRecipeById,
    postRecipe,
    getDBDiets,
 }
