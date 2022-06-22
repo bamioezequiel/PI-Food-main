@@ -25,7 +25,7 @@ const validateDiet = (diet) => {
         return <span className={style.badgeRed}>{diet}</span> ;
         case 'vegan':
         case 'lacto ovo vegetarian':
-        return <span className={`${style.badgeGreen} ${style.badgeGreen}`}>{diet}</span>;
+        return <span className={style.badgeGreen}>{diet}</span>;
         case 'paleolithic':
         case 'primal':
         return <span className={style.badgePurple}>{diet}</span>;

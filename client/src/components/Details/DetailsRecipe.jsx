@@ -7,11 +7,13 @@ import style from './DetailsRecipe.module.css';
 export default function DetailsRecipe() {
     let { id } = useParams();
     const dispatch = useDispatch();
-    let recipe = useSelector( (state) => state.recipe[0] );
+    let recipe = useSelector( (state) => state.recipe );
+    recipe = recipe[0];//fix
+
     useEffect( () => {
         dispatch(getRecipeById(id));
-    }, [dispatch]);
-
+    }, []);
+     
    return (
     <div className={style.container}>
         <h1 className={style.title}> {recipe.name} </h1>
@@ -26,5 +28,5 @@ export default function DetailsRecipe() {
             }
         </ol>
     </div>
-   ) 
+   )
 }

@@ -5,7 +5,7 @@ const { Recipe, Diet } = require('./../db.js');
 
 const url = 'https://api.spoonacular.com/recipes';
 
-const getApiRecipes = async (amount = 100) => {
+const getApiRecipes = async (amount = 10) => {
     const apiInfo = await axios.get(`${url}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${amount}`);
     const apiRecipes = await apiInfo.data.results.map( (el) => {
         return { 
@@ -76,9 +76,9 @@ const postRecipe = async ({name, summary, healthScore, steps, image, diets}) => 
 const getDBDiets = () => {
     return fetch(`${url}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
         .then( (res)        => res.json() )
-        .then( (apiInfo)    => apiInfo.results.map( (el) => el.diets ) )
+        .then( (apiInfo)    => apiInfo.results?.map( (el) => el.diets ) )
         .then( (apiDiets)   => {
-            apiDiets.map( (el) => { 
+            apiDiets?.map( (el) => { 
                 el.forEach( (el) => Diet.findOrCreate({ where: { name: el } }) );
             });
         })

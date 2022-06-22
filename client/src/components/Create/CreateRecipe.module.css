@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_container {
+    padding: 25px 30px;
+    border-radius: 5px;
+}
+
+.form_container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_textarea *,
+.form_container form input {
+    padding: 10px;
+    margin: 5px;
+    border: thin solid #ccc;
+    border-radius: 5px;
+}
+
+.form_textarea * {
+    resize: none;
+}
+
+.title {
+    font-size: 25px;;
+    font-weight: 500;
+}
