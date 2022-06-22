@@ -1,0 +1,25 @@
+.container {
+    width: 100%;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+
+}
+
+.image {
+    border-radius: 10px;
+}
+
+.steps {
+    margin-left: 250px;
+}
+
+.step {
+    width: 75%;
+    margin: 10px 0;
+}

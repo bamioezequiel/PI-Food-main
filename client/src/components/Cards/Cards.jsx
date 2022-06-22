@@ -7,8 +7,7 @@ export default function Cards({ recipes }) {
         <div className={style.cards}>
             {
                 recipes?.map( (el) => {
-                    console.log(el.image)
-                    return <Card name={el.name} image={el.image} diets={el.diets}/>
+                    return <Card key={el.id} id={el.id} name={el.name} image={el.image} diets={el.diets}/>
                 })
             }
         </div>            
