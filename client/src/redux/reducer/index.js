@@ -1,7 +1,8 @@
-import { GET_ALL_RECIPES } from './../actions/index.js';
+import { GET_ALL_RECIPES, GET_RECIPE_BY_ID } from './../actions/index.js';
 
 const initialState = {
-    recipes: []
+    recipes: [],
+    recipe: {}
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -12,7 +13,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 recipes: action.payload    
             }
-    
+        case GET_RECIPE_BY_ID:
+            return {
+                ...state,
+                recipe: action.payload
+            }
         default:
         return ({ ...state });
     }

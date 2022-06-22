@@ -1,20 +1,20 @@
 import React from "react";
-import icon from './../../assets/search.png'
-import style from './Filter.module.css'
+import icon from './../../assets/search.png';
+import style from './Filter.module.css';
 
 export default function Filter() {
     return (
         <div className={style.container} >
             <div className={style.container_filter}>
                 <select className={style.filter}>
-                    <option value="test">Test</option>
-                    <option value="test">Test</option>
-                    <option value="test">Test</option>
+                    <option value="not">Order Alphabetically</option>
+                    <option value="asc">A-Z</option>
+                    <option value="des">Z-A</option>
                 </select>
                 <select className={style.filter}>
-                    <option value="test">Test</option>
-                    <option value="test">Test</option>
-                    <option value="test">Test</option>
+                    <option value="not">Order by Health Score</option>
+                    <option value="max">100 to 1</option>
+                    <option value="min">1 to 100</option>
                 </select>
             </div>
 
@@ -25,7 +25,7 @@ export default function Filter() {
                             <input type="text" className={style.search} placeholder='Search' />
                         </td>
                         <td>
-                            <a href="#"><img src={icon} className={style.icon} /></a>
+                            <button className={style.button_icon} > <img src={icon} className={style.icon} /> </button>
                         </td>
                     </tr>
                 </table>
