@@ -1,4 +1,8 @@
-import { GET_ALL_RECIPES, GET_RECIPE_BY_ID, GET_DIETS, FILTER_BY_DIEST } from './../actions/index.js';
+import { GET_ALL_RECIPES,
+         GET_RECIPE_BY_ID,
+         GET_DIETS,
+         FILTER_BY_DIEST,
+         FILTER_BY_ALPHABETICA } from './../actions/index.js';
 
 const initialState = {
     recipes: [],
@@ -31,6 +35,23 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: filterRecipes
+            }
+        case FILTER_BY_ALPHABETICA:
+            let filterAlpha = [];
+            if(action.payload === 'all') { filterAlpha = state.recipes }
+            if(action.payload === 'asc') {
+                filterAlpha = state.filterRecipes.sort( (a,b) => {
+                    return a.name.localeCompare(b.name);
+                });
+            } else {
+                filterAlpha = state.filterRecipes.sort( (a,b) => {
+                    return b.name.localeCompare(a.name);
+                });
+            }
+
+            return {
+                ...state,
+                recipes: [...filterAlpha]
             }
         default:
             return ({ ...state });

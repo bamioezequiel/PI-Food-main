@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByDiets, getDiets } from "../../redux/actions";
+import { filterByAlphabetica, filterByDiets, getDiets } from "../../redux/actions";
 import icon from './../../assets/search.png';
 import style from './Filter.module.css';
 
@@ -13,14 +13,18 @@ export default function Filter() {
     }, [dispatch])
 
     const handlerFilterByDiets = (e) => {
-        console.log(e.target.value)
         dispatch(filterByDiets(e.target.value));
+    }
+
+    const handlerFilterByAlphabetica = (e) => {
+        console.log('ORder')
+        dispatch(filterByAlphabetica(e.target.value));
     }
 
     return (
         <div className={style.container} >
             <div className={style.container_filter}>
-                <select className={style.filter}>
+                <select onChange={ (e) => handlerFilterByAlphabetica(e) } className={style.filter}>
                     <option value="all">Order Alphabetically</option>
                     <option value="asc">A-Z</option>
                     <option value="des">Z-A</option>
