@@ -10,26 +10,26 @@ export default class Card extends React.Component {
                 <div className={style.body}>
                     <img src={this.props.image} className={style.img} alt={this.props.title} />
                     <h2 className={style.title}>{this.props.name}</h2>
-                    <div className={style.description}> { this.props.diets?.map( (el) => validateDiet(el) ) } </div>
+                    <div className={style.description}> { this.props.diets?.map( (el, i) => validateDiet(el, i) ) } </div>
                 </div>
-                <NavLink to={`/recipe/${this.props.id}`} className={style.btn}>Ver más</NavLink>
+                <NavLink to={`/recipe/${this.props.id}`} className={style.btn}>More</NavLink>
             </div>            
         )
     }
 }
 
-const validateDiet = (diet) => {
+const validateDiet = (diet, i) => {
     switch(diet) {
         case 'gluten free':
         case 'dairy free':
-        return <span className={style.badgeRed}>{diet}</span> ;
+        return <span key={i} className={style.badgeRed}>{diet}</span> ;
         case 'vegan':
         case 'lacto ovo vegetarian':
-        return <span className={style.badgeGreen}>{diet}</span>;
+        return <span key={i} className={style.badgeGreen}>{diet}</span>;
         case 'paleolithic':
         case 'primal':
-        return <span className={style.badgePurple}>{diet}</span>;
+        return <span key={i} className={style.badgePurple}>{diet}</span>;
         default:
-        return <span className={style.badgeCyan}>{diet}</span> ;
+        return <span key={i} className={style.badgeCyan}>{diet}</span> ;
     }
 }

@@ -5,6 +5,7 @@
 }
 
 .form_container {
+    width: 55%;
     padding: 25px 30px;
     border-radius: 5px;
 }
@@ -12,6 +13,10 @@
 .form_container form {
     display: flex;
     flex-direction: column;
+}
+
+.form_textarea {
+    display: flex;
 }
 
 .form_textarea *,
@@ -23,10 +28,24 @@
 }
 
 .form_textarea * {
+    width: 50%;
     resize: none;
 }
 
 .title {
     font-size: 25px;;
     font-weight: 500;
+}
+
+.type_diets {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.button {
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px 0;
 }
