@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import Cards from "../Cards/Cards.jsx";
+import Card from "../Card/Card.jsx";
 import Filter from "../Filter/Filter.jsx";
 import { getAllRecipes } from './../../redux/actions/index.js';
 import style from './Home.module.css';
@@ -22,7 +22,13 @@ export default function Home() {
             <Filter />
             {/* <button onClick={e=>{handleClick(e)}}>Reset</button> */}
             <div className={style.container}>
-                <Cards recipes={allRecipes} />
+                <div className={style.cards}>
+                {
+                    allRecipes?.map( (el) => {
+                        return <Card key={el.id} id={el.id} name={el.name} image={el.image} diets={el.diets}/>
+                    })
+                }
+                </div>  
             </div>
         </React.Fragment>
     )

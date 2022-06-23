@@ -5,7 +5,7 @@ const { Recipe, Diet } = require('./../db.js');
 
 const url = 'https://api.spoonacular.com/recipes';
 
-const getApiRecipes = async (amount = 10) => {
+const getApiRecipes = async (amount = 100) => {
     const apiInfo = await axios.get(`${url}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${amount}`);
     const apiRecipes = await apiInfo.data.results.map( (el) => {
         return { 
@@ -73,30 +73,18 @@ const postRecipe = async ({name, summary, healthScore, steps, image, diets}) => 
 
 /* ------------------------------------------- */
 
-const getDBDiets = () => {
-    return fetch(`${url}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
-        .then( (res)        => res.json() )
-        .then( (apiInfo)    => apiInfo.results?.map( (el) => el.diets ) )
-        .then( (apiDiets)   => {
-            apiDiets?.map( (el) => { 
-                el.forEach( (el) => Diet.findOrCreate({ where: { name: el } }) );
-            });
-        })
-        .then( () => Diet.findAll() )
-        .catch( (error) => console.error(error) )
-}
-
-/* 
 const getDBDiets = async () => {
-    const apiInfo = await axios.get(`${url}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`);
-    const apiDiets = apiInfo.data.results.map( (el) => el.diets );
-    apiDiets.map( (el) => { 
-        el.forEach( (el) => Diet.findOrCreate({ where: { name: el } }) );
-    });
-    
+    const apiInfo = await axios.get(`${url}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
+    let apiDiets = apiInfo.data.results.map( (el) => el.diets );
+    apiDiets = [...new Set(apiDiets.flat()), 'vegetarian'];
+
+    for(let i = 0; i < apiDiets.length; i++) {
+        await Diet.findOrCreate({ where: { name: apiDiets[i] } });
+    }
+
     return await Diet.findAll();
 }
-*/
+
 
 module.exports = {
    getApiRecipes,

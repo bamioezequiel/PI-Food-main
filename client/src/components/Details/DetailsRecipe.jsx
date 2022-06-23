@@ -8,8 +8,7 @@ export default function DetailsRecipe() {
     let { id } = useParams();
     const dispatch = useDispatch();
     let recipe = useSelector( (state) => state.recipe );
-    recipe = recipe[0];//fix
-
+    recipe = recipe[0];
     useEffect( () => {
         dispatch(getRecipeById(id));
     }, []);
