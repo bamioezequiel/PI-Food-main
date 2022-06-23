@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByAlphabetica, filterByDiets, getDiets } from "../../redux/actions";
+import { filterByAlphabetica, filterByDiets, getDiets, searchByName } from "../../redux/actions";
 import icon from './../../assets/search.png';
 import style from './Filter.module.css';
 
@@ -17,8 +17,11 @@ export default function Filter() {
     }
 
     const handlerFilterByAlphabetica = (e) => {
-        console.log('ORder')
         dispatch(filterByAlphabetica(e.target.value));
+    }
+
+    const handlerSearchByName = (e) => {
+        dispatch(searchByName(e.target.value));
     }
 
     return (
@@ -35,10 +38,12 @@ export default function Filter() {
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" className={style.search} placeholder='Search' />
+                                    <input type="text"  onChange={ (e) => handlerSearchByName(e) } className={style.search} placeholder='Search' />
                                 </td>
                                 <td>
-                                    <button className={style.button_icon} > <img src={icon} className={style.icon} alt='icon search not found' /> </button>
+                                    <button className={style.button_icon}>
+                                         <img src={icon} className={style.icon} alt='icon search not found' />
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

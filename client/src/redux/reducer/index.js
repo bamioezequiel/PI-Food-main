@@ -2,7 +2,8 @@ import { GET_ALL_RECIPES,
          GET_RECIPE_BY_ID,
          GET_DIETS,
          FILTER_BY_DIEST,
-         FILTER_BY_ALPHABETICA } from './../actions/index.js';
+         FILTER_BY_ALPHABETICA, 
+         SEARCH_BY_NAME} from './../actions/index.js';
 
 const initialState = {
     recipes: [],
@@ -48,10 +49,15 @@ const rootReducer = (state = initialState, action) => {
                     return b.name.localeCompare(a.name);
                 });
             }
-
             return {
                 ...state,
                 recipes: [...filterAlpha]
+            }
+        case SEARCH_BY_NAME:
+            const searchRecipes = state.filterRecipes.filter( (el) => el.name.toLowerCase().includes(action.payload.toLowerCase()) );
+            return {
+                ...state,
+                recipes: [...searchRecipes]       
             }
         default:
             return ({ ...state });
