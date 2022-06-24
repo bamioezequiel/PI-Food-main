@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByAlphabetica, filterByDiets, getDiets, searchByName } from "../../redux/actions";
 import icon from './../../assets/search.png';
@@ -7,7 +7,6 @@ import style from './Filter.module.css';
 export default function Filter() {
 
     const dispatch = useDispatch();
-    const [ aux, setAux ] = useState('');
     const diets = useSelector( (state) => state.diets )
     useEffect( () => {
         dispatch(getDiets());
