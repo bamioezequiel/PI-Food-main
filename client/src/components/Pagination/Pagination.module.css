@@ -1,7 +1,15 @@
+.container {
+    margin: auto;
+    width: 500px;
+}
+
+.container h5 {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
 .container_pagination {
     display: flex;
-    margin: auto;
-    width: 400px;
     margin-bottom: 20px;
 }
 

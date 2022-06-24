@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getDiets } from './../../redux/actions/index.js';
 import style from './CreateRecipe.module.css';
 
 export default function CreateRecipe() {
     //traer tipo de dietas
+    const dispatch = useDispatch();
+    const diets = useSelector( (state) => state.diets );
+    useEffect( () => {
+        dispatch(getDiets())
+    }, [dispatch])
     //[] visualizar en tiempo real la receta creada
     return (
         <div className={style.container}> 
@@ -17,9 +24,14 @@ export default function CreateRecipe() {
                         <textarea name="steps" className={style.input_box} cols="30" rows="10" placeholder="Steps"></textarea>
                     </div>
                     <div className={style.type_diets}>
-                        {/* checkbox para seleccionar los tipos de dietas */}
-                        <input type="checkbox" name="test" id="" />
-                        <label name="test">test</label>
+                        {
+                            diets?.map( (d) => (
+                                <div key={d.id} className={style.diet}>
+                                    <input type="checkbox" name={d.name} id={d.id} />
+                                    <label htmlFor={d.id}>{d.name}</label>
+                                </div>
+                            ))
+                        }
                     </div>
                     <button type="submit" className={style.button}>Send</button>
                 </form>

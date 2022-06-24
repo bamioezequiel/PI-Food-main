@@ -40,8 +40,13 @@
 .type_diets {
     margin: 20px 0;
     display: flex;
+    justify-content: start;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.diet {
+    margin: 5px;
 }
 
 .button {

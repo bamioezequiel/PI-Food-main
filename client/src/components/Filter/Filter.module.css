@@ -61,3 +61,25 @@
     border: none;
     cursor: pointer;
 }
+
+.container_btn_clean {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn_clean {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 1rem;
+    text-align: center;
+    background-color: transparent;
+    border: thin solid #000;
+    cursor: pointer;
+}
+
+.btn_clean:hover {
+    border-color: #fbb304;
+    background-color: #fbb304;
+}

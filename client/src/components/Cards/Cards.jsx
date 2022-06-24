@@ -19,7 +19,7 @@ export default function Cards({ recipes }) {
     return (
         <React.Fragment>
             <div className={style.container}>
-                <Pagination recipesPage={recipesPage} recipes={recipes.length} pagination={pagination} />
+                <Pagination currentPage={currentPage} recipesPage={recipesPage} recipes={recipes.length} pagination={pagination} />
                 <div className={style.cards}>
                 {
                     currentRecipes?.map( (el) => {
