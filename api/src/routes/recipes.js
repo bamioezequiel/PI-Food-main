@@ -6,24 +6,15 @@ const router = Router();
 module.exports = router;
 
 router.get('/', async (req, res) => {
-    try {
-        let recipes = await getAllRecipes();
-        res.status(200).json(recipes);
-    } catch (error) {
-        res.status(404).json( { error: error.message } );
-    }
-});
-
-router.get('/', async (req, res) => {
     let { name } = req.query;
     try {
-        if(!name) { throw Error('No hay parametros suficientes para hacer esta petición'); }
         let recipes = await getAllRecipes();
+        if(!name) { return res.status(200).json(recipes); }
         const filteredRecipes = recipes.filter( (el) => el.name.toLowerCase().includes(name.toLowerCase()) );
         if(filteredRecipes.length === 0) { throw Error('No hay recetas para mostrar.')  }
-        res.status(200).json(filteredRecipes);
+        return res.status(200).json(filteredRecipes);
     } catch (error) {
-        res.status(404).json( { error: error.message } );
+        return res.status(404).json( { error: error.message } );
     }
 });
 

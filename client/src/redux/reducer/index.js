@@ -3,7 +3,8 @@ import { GET_ALL_RECIPES,
          GET_DIETS,
          FILTER_BY_DIEST,
          ORDER_RECIPES, 
-         SEARCH_BY_NAME } from './../actions/index.js';
+         SEARCH_BY_NAME, 
+         POST_RECIPE} from './../actions/index.js';
 
 const initialState = {
     recipes: [],
@@ -14,6 +15,11 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        case POST_RECIPE: 
+            return {
+                ...state,
+                recipe: { ...action.payload }
+            }
         case GET_ALL_RECIPES:
             return {
                 ...state,
@@ -62,10 +68,9 @@ const rootReducer = (state = initialState, action) => {
                 recipes: [...filterAlpha]
             }
         case SEARCH_BY_NAME:
-            const searchRecipes = state.filterRecipes.filter( (el) => el.name.toLowerCase().includes(action.payload.toLowerCase()) );
             return {
                 ...state,
-                recipes: [...searchRecipes]       
+                recipes: action.payload      
             }
         default:
             return ({ ...state });

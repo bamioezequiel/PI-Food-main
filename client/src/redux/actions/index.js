@@ -1,11 +1,19 @@
 import axios from 'axios';
 
+export const POST_RECIPE = 'POST_RECIPE';
 export const GET_ALL_RECIPES = 'GET_ALL_RECIPES';
 export const GET_RECIPE_BY_ID = 'GET_RECIPE_BY_ID';
 export const GET_DIETS = 'GET_DIETS';
 export const FILTER_BY_DIEST = 'FILTER_BY_DIEST';
 export const ORDER_RECIPES = 'ORDER_RECIPES';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
+
+export const postRecipe = (recipe) => {
+    return async function(dispatch) {
+        const res = await axios.post('http://localhost:3001/recipes', recipe);
+        return dispatch({ type: POST_RECIPE, payload: res.data });
+    }
+}
 
 export const getAllRecipes = () => {
     return function (dispatch) {
@@ -44,6 +52,7 @@ export const orderRecipes = (value) => {
 
 export const searchByName = (value) => {
     return async function(dispatch) {
-        return dispatch({ type: SEARCH_BY_NAME, payload: value });
+        const res = await axios.get(`http://localhost:3001/recipes?name=${value}`);
+        return dispatch({ type: SEARCH_BY_NAME, payload: res.data });
     }
 }
