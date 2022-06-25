@@ -1,45 +1,52 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByAlphabetica, filterByDiets, getDiets, searchByName } from "../../redux/actions";
+import { getAllRecipes, orderRecipes, filterByDiets, getDiets, searchByName } from "../../redux/actions";
 import icon from './../../assets/search.png';
 import style from './Filter.module.css';
 
-export default function Filter() {
+export default function Filter({ pagination }) {
 
     const dispatch = useDispatch();
-    const diets = useSelector( (state) => state.diets )
+    const diets = useSelector( (state) => state.diets );
+
     useEffect( () => {
         dispatch(getDiets());
     }, [dispatch])
 
     const handlerFilterByDiets = (e) => {
         dispatch(filterByDiets(e.target.value));
+        pagination(1);
+    }
+
+    const handlerOrder = (e) => {
+        dispatch(orderRecipes(e.target.value));
     }
     
-    const handlerFilterByAlphabetica = (e) => {
-        dispatch(filterByAlphabetica(e.target.value));
-    }
-
     const handlerSearchByName = (e) => {
         dispatch(searchByName(e.target.value));
+        pagination(1);
     }
-
+    
     const handlerClean = (e) => {
         e.preventDefault();
         const filters = document.querySelectorAll('select');
         const search = document.getElementById('search');
         search.value = '';
         filters.forEach( (f) => f.value = 'all' )
-        dispatch(filterByDiets('all'));
+        dispatch(getAllRecipes());
+        pagination(1);
     }
 
     return (
         <div className={style.container} >
+
             <div className={style.container_filter}>
-                <select onChange={ (e) => handlerFilterByAlphabetica(e) } className={style.filter}>
+                <select onChange={ (e) => handlerOrder(e) } className={style.filter}>
                     <option value="all">Order Alphabetically</option>
                     <option value="asc">A-Z</option>
                     <option value="des">Z-A</option>
+                    <option value="ascScore">100-1</option>
+                    <option value="desScore">1-100</option>
                 </select>
 
                 <div className={style.container_search}>
@@ -50,9 +57,7 @@ export default function Filter() {
                                     <input type="text" id='search' onChange={ (e) => handlerSearchByName(e) } className={style.search} placeholder='Search' />
                                 </td>
                                 <td>
-                                    <button className={style.button_icon}>
-                                         <img src={icon} className={style.icon} alt='icon search not found' />
-                                    </button>
+                                    <img src={icon} className={style.icon} alt='icon search not found' />
                                 </td>
                             </tr>
                         </tbody>
@@ -68,6 +73,7 @@ export default function Filter() {
                     }
                 </select>
             </div>
+            
             <div className={style.container_btn_clean}>
                 <button className={style.btn_clean} onClick={ (e) => handlerClean(e) }>Clean</button>
             </div>

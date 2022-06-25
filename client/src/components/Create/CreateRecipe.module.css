@@ -1,7 +1,6 @@
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 }
 
 .form_container {
@@ -54,3 +53,41 @@
     margin: 0 auto;
     padding: 10px 0;
 }
+
+.previus_recipe {
+    width: 45%;
+    padding: 25px 30px;
+}
+
+.card {
+    width: 100%;
+    box-shadow: 0 2px 20px #e1e5ee;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card img {
+    height: 12rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card h3 {
+    padding: 0.2rem 1rem;
+}
+
+.card span {
+    padding: 0 1rem;
+}
+
+.card_textarea {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+/* .card p {
+} */

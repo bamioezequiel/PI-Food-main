@@ -4,7 +4,7 @@ export const GET_ALL_RECIPES = 'GET_ALL_RECIPES';
 export const GET_RECIPE_BY_ID = 'GET_RECIPE_BY_ID';
 export const GET_DIETS = 'GET_DIETS';
 export const FILTER_BY_DIEST = 'FILTER_BY_DIEST';
-export const FILTER_BY_ALPHABETICA = 'FILTER_BY_ALPHABETICA';
+export const ORDER_RECIPES = 'ORDER_RECIPES';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 
 export const getAllRecipes = () => {
@@ -36,11 +36,11 @@ export const filterByDiets = (value) => {
     }
 }
 
-export const filterByAlphabetica = (value) => {
+export const orderRecipes = (value) => {
     return async function(dispatch) {
-        return dispatch({ type: FILTER_BY_ALPHABETICA, payload: value });
+        return dispatch({ type: ORDER_RECIPES, payload: value });
     }
-}
+}   
 
 export const searchByName = (value) => {
     return async function(dispatch) {

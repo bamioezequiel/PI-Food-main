@@ -9,31 +9,33 @@ export default function Pagination({ currentPage, recipesPage, recipes, paginati
 
     return (
         <div className={style.container}>
-            <h5>Page: {currentPage} / {pageNumbers.length}</h5>
+            {
+                pageNumbers.length > 0 && <h5>Page: {currentPage} / {pageNumbers.length}</h5>
+            }
             <div className={style.container_pagination}> 
-                <button key='prev' 
-                    className={style.pagination_page} 
-                    onClick={ () => {
-                        if(currentPage > 1) { 
-                            pagination(currentPage-1) 
-                        }
-                    }}>&lt;</button>      
-                {
-                    pageNumbers?.map( (el) => {
-                        return <button 
-                            key={el} 
-                            className={style.pagination_page} 
-                            onClick={ () => pagination(el) }>{el}</button>
-                    })
-                }
+            {   
+                pageNumbers.length > 1 && <button key='prev' 
+                className={style.pagination_page} 
+                onClick={ () => {
+                    if(currentPage > 1) { pagination(currentPage-1); }
+                } }>&lt;</button> 
+            } 
+                
+            {
+                pageNumbers?.map( (el) => {
+                    return <button 
+                        key={el} 
+                        className={style.pagination_page} 
+                        onClick={ () => pagination(el) }>{el}</button>
+                })
+            }
 
-                <button key='next' 
-                    className={style.pagination_page} 
-                    onClick={ () => {
-                        if(currentPage < pageNumbers.length) {
-                            pagination(currentPage+1) 
-                        }
-                    }}>&gt;</button>
+               { 
+                pageNumbers.length > 1 && <button key='next' 
+                className={style.pagination_page} 
+                onClick={ () => {
+                    if(currentPage < recipesPage) {  pagination(currentPage+1); } 
+                }}>&gt;</button>}
             </div>
         </div>
     )

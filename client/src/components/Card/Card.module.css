@@ -15,7 +15,11 @@
 }
 
 .title {
-    padding: 1rem;
+    padding: 0.2rem 1rem;
+}
+
+.score {
+    padding: 0 1rem;
 }
 
 .description {

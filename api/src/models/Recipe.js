@@ -20,6 +20,9 @@ module.exports = (sequelize) => {
     healthScore: {
       type: DataTypes.INTEGER
     },
+    dishTypes: {
+      type: DataTypes.STRING
+    },
     steps: {
       type: DataTypes.STRING
     },

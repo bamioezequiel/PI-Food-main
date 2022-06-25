@@ -2,8 +2,8 @@ import { GET_ALL_RECIPES,
          GET_RECIPE_BY_ID,
          GET_DIETS,
          FILTER_BY_DIEST,
-         FILTER_BY_ALPHABETICA, 
-         SEARCH_BY_NAME} from './../actions/index.js';
+         ORDER_RECIPES, 
+         SEARCH_BY_NAME } from './../actions/index.js';
 
 const initialState = {
     recipes: [],
@@ -18,7 +18,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload,
-                filterRecipes: action.payload    
+                filterRecipes: JSON.parse(JSON.stringify(action.payload))  
             }
         case GET_RECIPE_BY_ID:
             return {
@@ -31,23 +31,31 @@ const rootReducer = (state = initialState, action) => {
                 diets: action.payload
             }
         case FILTER_BY_DIEST:
-            const recipes = state.filterRecipes;
-            const filterRecipes = action.payload === 'all' ? recipes : recipes.filter( (el) => el.diets.includes(action.payload) );
+            state.filterRecipes = (action.payload === 'all') 
+                                  ? state.filterRecipes 
+                                  : state.filterRecipes.filter( (el) => el.diets.includes(action.payload) );
             return {
                 ...state,
-                recipes: filterRecipes
+                recipes: state.filterRecipes
             }
-        case FILTER_BY_ALPHABETICA:
+        case ORDER_RECIPES:
             let filterAlpha = [];
-            if(action.payload === 'all') { filterAlpha = state.recipes }
-            if(action.payload === 'asc') {
-                filterAlpha = state.filterRecipes.sort( (a,b) => {
-                    return a.name.localeCompare(b.name);
-                });
-            } else {
-                filterAlpha = state.filterRecipes.sort( (a,b) => {
-                    return b.name.localeCompare(a.name);
-                });
+            switch(action.payload) {
+                case 'asc':
+                    filterAlpha = state.filterRecipes.sort( (a,b) => a.name.localeCompare(b.name) );
+                    break;
+                case 'des':
+                    filterAlpha = state.filterRecipes.sort( (a,b) => b.name.localeCompare(a.name) );
+                    break;
+                case 'ascScore':
+                    filterAlpha = state.filterRecipes.sort( (a,b) => b.healthScore - a.healthScore );
+                    break;
+                case 'desScore':
+                    filterAlpha = state.filterRecipes.sort( (a,b) => a.healthScore - b.healthScore );
+                    break;
+                default:
+                    filterAlpha = state.filterRecipes;
+                    break;
             }
             return {
                 ...state,

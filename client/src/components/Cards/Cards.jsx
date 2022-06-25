@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Card from "../Card/Card.jsx";
+import Filter from "../Filter/Filter.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
 import style from './Cards.module.css';
 
@@ -18,13 +19,18 @@ export default function Cards({ recipes }) {
 
     return (
         <React.Fragment>
+            <Filter pagination={pagination} />
             <div className={style.container}>
-                <Pagination currentPage={currentPage} recipesPage={recipesPage} recipes={recipes.length} pagination={pagination} />
+                {
+                    currentRecipes.length && <Pagination currentPage={currentPage} recipesPage={recipesPage} recipes={recipes.length} pagination={pagination} />
+                }
                 <div className={style.cards}>
                 {
-                    currentRecipes?.map( (el) => {
-                        return <Card key={el.id} id={el.id} name={el.name} image={el.image} diets={el.diets}/>
+                    (currentRecipes.length > 0) 
+                    ? currentRecipes.map( (el) => {
+                        return <Card key={el.id} id={el.id} name={el.name} image={el.image} healthScore={el.healthScore} diets={el.diets}/>
                     })
+                    : <h2>No recipes available</h2>
                 }
                 </div>  
             </div>

@@ -9,6 +9,7 @@ export default class Card extends React.Component {
             <div className={style.card}>
                 <div className={style.body}>
                     <img src={this.props.image} className={style.img} alt={this.props.title} />
+                    <h5 className={style.score}>HealthScore: <i>{this.props.healthScore}</i></h5>
                     <h2 className={style.title}>{this.props.name}</h2>
                     <div className={style.description}> { this.props.diets?.map( (el, i) => validateDiet(el, i) ) } </div>
                 </div>

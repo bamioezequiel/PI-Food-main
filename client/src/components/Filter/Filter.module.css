@@ -1,5 +1,5 @@
 .container {
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .container_search {
@@ -54,6 +54,7 @@
 
 .icon {
     width: 20px;
+    margin-right: 20px;
 }
 
 .button_icon {
