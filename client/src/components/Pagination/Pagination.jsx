@@ -34,7 +34,7 @@ export default function Pagination({ currentPage, recipesPage, recipes, paginati
                 pageNumbers.length > 1 && <button key='next' 
                 className={style.pagination_page} 
                 onClick={ () => {
-                    if(currentPage < recipesPage) {  pagination(currentPage+1); } 
+                    if(currentPage < pageNumbers.length) {  pagination(currentPage+1); } 
                 }}>&gt;</button>}
             </div>
         </div>
