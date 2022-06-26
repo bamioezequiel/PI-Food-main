@@ -10,31 +10,47 @@ export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 
 export const postRecipe = (recipe) => {
     return async function(dispatch) {
-        const res = await axios.post('http://localhost:3001/recipes', recipe);
-        return dispatch({ type: POST_RECIPE, payload: res.data });
+        try {
+            const res = await axios.post('http://localhost:3001/recipes', recipe);
+            return dispatch({ type: POST_RECIPE, payload: res.data });
+        } catch(error) {
+            console.error(error);
+        }
     }
 }
 
 export const getAllRecipes = () => {
     return function (dispatch) {
-        return fetch('http://localhost:3001/recipes')
-            .then( (res)    => res.json() )
-            .then( (data)   => dispatch({ type: GET_ALL_RECIPES, payload: data }) )
-            .catch( (error) => console.error(error) )
+        try {
+            return fetch('http://localhost:3001/recipes')
+                .then( (res)    => res.json() )
+                .then( (data)   => dispatch({ type: GET_ALL_RECIPES, payload: data }) )
+                .catch( (error) => console.error(error) )
+        } catch(error) {
+                console.error(error);
+        }
     }
 }
 
 export const getRecipeById = (id) => {
     return async function (dispatch) {
-        const res = await axios.get(`http://localhost:3001/recipes/${Number(id)}`);
-        return dispatch({ type:  GET_RECIPE_BY_ID, payload: res.data });
+        try {
+            const res = await axios.get(`http://localhost:3001/recipes/${Number(id)}`);
+            return dispatch({ type:  GET_RECIPE_BY_ID, payload: res.data });
+        } catch(error) {
+            console.error(error);
+        }
     }
 }
 
 export const getDiets = () => {
     return async function(dispatch) {
-        const res = await axios.get('http://localhost:3001/diets');
-        return dispatch({ type: GET_DIETS, payload: res.data });
+        try {
+            const res = await axios.get('http://localhost:3001/diets');
+            return dispatch({ type: GET_DIETS, payload: res.data });
+        } catch(error) {
+            console.error(error);
+        }
     }
 }
 
@@ -52,7 +68,11 @@ export const orderRecipes = (value) => {
 
 export const searchByName = (value) => {
     return async function(dispatch) {
-        const res = await axios.get(`http://localhost:3001/recipes?name=${value}`);
-        return dispatch({ type: SEARCH_BY_NAME, payload: res.data });
+        try {
+            const res = await axios.get(`http://localhost:3001/recipes?name=${value}`);
+            return dispatch({ type: SEARCH_BY_NAME, payload: res.data });
+        } catch(error) {
+            console.error(error);
+        }
     }
 }

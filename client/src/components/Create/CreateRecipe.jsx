@@ -6,6 +6,9 @@ import style from './CreateRecipe.module.css';
 import Food404 from './../../assets/404Food.png';
 
 export default function CreateRecipe() {
+
+    // Validations
+
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         name: '',
@@ -110,7 +113,6 @@ export default function CreateRecipe() {
                     </div>
                    
                     <button type="submit" onClick={ (e) => handleSubmit(e) } className={style.button}>Send</button>
-                   
                 </form>
             </div>
             <div className={style.previus_recipe}>
