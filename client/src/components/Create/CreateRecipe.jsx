@@ -10,6 +10,7 @@ export default function CreateRecipe() {
     // Validations
 
     const dispatch = useDispatch();
+    const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
         name: '',
         summary: '',
@@ -31,6 +32,10 @@ export default function CreateRecipe() {
             ...input,
             [e.target.name]: e.target.value
         });
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }));
     }
 
     const handleCheck = (e) => {
@@ -50,6 +55,9 @@ export default function CreateRecipe() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(!input.name && !input.summary) {
+            alert('Error in required fields');
+        }
         let res = await dispatch(postRecipe(input));
         alert(`"${res.payload.name}" was created successfully`);
     }
@@ -59,11 +67,14 @@ export default function CreateRecipe() {
             <div className={style.form_container}>
                 <h1 className={style.title}>Create recipe</h1>
                 <form>
+                    {
+                        errors.name && <span className={style.form_message_error}>{errors.name}</span>
+                    }
                     <input type="text" 
                         name="name" 
                         value={input.name} 
                         onChange={ (e) => handleChange(e) }
-                        className={style.input_box} 
+                        className={`${style.input_box} ${errors.name && style.form_error}`} 
                         placeholder="Name..." />
                     <input type="text" 
                         name="dishTypes" 
@@ -77,20 +88,25 @@ export default function CreateRecipe() {
                         onChange={ (e) => handleChange(e) }
                         className={style.input_box} 
                         placeholder="https://image.png" />
+                    {
+                        errors.healthScore && <span className={style.form_message_error}>{errors.healthScore}</span>
+                    }
                     <input type="number" 
                         name="healthScore" 
                         value={input.healthScore} 
                         onChange={ (e) => handleChange(e) }
                         min='0'
                         max='100'
-                        className={style.input_box} 
+                        className={`${style.input_box} ${errors.healthScore && style.form_error}`} 
                         placeholder="Health Score..." />
-
+                    {
+                        errors.summary && <span className={style.form_message_error}>{errors.summary}</span>
+                    }
                     <div className={style.form_textarea}>
                         <textarea name="summary" 
                             value={input.summary} 
                             onChange={ (e) => handleChange(e) }
-                            className={style.input_box} 
+                            className={`${style.input_box} ${errors.summary && style.form_error}`} 
                             cols="30" rows="10" 
                             placeholder="Summary"></textarea>
                         <textarea name="steps" 
@@ -112,22 +128,76 @@ export default function CreateRecipe() {
                         }
                     </div>
                    
-                    <button type="submit" onClick={ (e) => handleSubmit(e) } className={style.button}>Send</button>
+                    {
+                        (Object.keys(errors).length === 0 && (input.name && input.summary)) 
+                        ? <button type="submit" onClick={ (e) => handleSubmit(e) } className={style.button}>Send</button>
+                        : null
+                    }
+                        
                 </form>
             </div>
             <div className={style.previus_recipe}>
                 <div className={style.card}>
-                    <img src={input.image ? input.image : Food404} width='300px' alt={input.name} />
+                    <img src={input.image ? input.image : Food404} id='img_create' width='300px' alt={input.name} />
                     <h3>Name: {input.name}</h3>
                     <h4>Dish types: {input.dishTypes}</h4>
                     <span>Health Score: {input.healthScore}</span>
                     <div className={style.card_textarea}>Summary: {input.summary}</div>
                     <div className={style.card_textarea}>Steps: {input.steps}</div>
-                    <div class={style.container_diets}>
-                        <TypeDiets diets={input.diets} />
-                    </div>
+                    <TypeDiets diets={input.diets} />
                 </div>
             </div>
         </div>
     )
 }
+
+const validate = (input) => {
+    let errors = {};
+    if(!input.name) {
+        errors.name = 'Name is not valid';
+    }
+
+    if(!input.summary) {
+        errors.summary = 'Summary is not valid';
+    }
+
+    if(input.healthScore < 0 || input.healthScore > 100) {
+        errors.healthScore = 'The health score cannot be less than 0 or greater than 100';
+    }
+    
+    return errors;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+if(!/(.jpg|.jpeg|.png)$/i.test(input.image)) {
+        let img = document.querySelector('#img_create');
+        if(img.naturalHeight === 0 || img.naturalHeight === 404) {
+            errors.image = 'Image is not valid';
+        }
+    }
+*/

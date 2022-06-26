@@ -19,7 +19,7 @@
 }
 
 .form_textarea *,
-.form_container form input {
+.input_box {
     padding: 10px;
     margin: 5px;
     border: thin solid #ccc;
@@ -52,6 +52,15 @@
     width: 50%;
     margin: 0 auto;
     padding: 10px 0;
+    font-size: 1.2rem;
+    border: thin solid #fbb304;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #fbb304;
+    color: #fff;
 }
 
 .previus_recipe {
@@ -96,4 +105,14 @@
 
 .container_diets {
     margin: 15px;
+}
+
+.form_error {
+    border-color: #ff0000;
+}
+
+.form_message_error {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #ff0000;
 }
