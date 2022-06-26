@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import TypeDiets from "../TypeDiets/TypeDiets.jsx";
 import { getDiets, postRecipe } from './../../redux/actions/index.js';
 import style from './CreateRecipe.module.css';
+import Food404 from './../../assets/404Food.png';
 
 export default function CreateRecipe() {
     const dispatch = useDispatch();
@@ -33,13 +35,12 @@ export default function CreateRecipe() {
         if(e.target.checked && !input.diets.includes(value)) {
             setInput({
                 ...input,
-                diets: [...diets, value]
+                diets: [...input.diets, value]
             })
         } else {
-            let i = input.diets.indexOf(value);
             setInput({
                 ...input,
-                diets: input.diets.splice(i, 1)
+                diets: input.diets.filter( (d) => d !== value )
             })
         }
     }
@@ -61,6 +62,12 @@ export default function CreateRecipe() {
                         onChange={ (e) => handleChange(e) }
                         className={style.input_box} 
                         placeholder="Name..." />
+                    <input type="text" 
+                        name="dishTypes" 
+                        value={input.dishTypes} 
+                        onChange={ (e) => handleChange(e) }
+                        className={style.input_box} 
+                        placeholder="Dish types..." />
                     <input type="text"
                         name="image" 
                         value={input.image} 
@@ -108,14 +115,15 @@ export default function CreateRecipe() {
             </div>
             <div className={style.previus_recipe}>
                 <div className={style.card}>
-                    <img src={input.image} width='300px' alt={input.name} />
+                    <img src={input.image ? input.image : Food404} width='300px' alt={input.name} />
                     <h3>Name: {input.name}</h3>
+                    <h4>Dish types: {input.dishTypes}</h4>
                     <span>Health Score: {input.healthScore}</span>
                     <div className={style.card_textarea}>Summary: {input.summary}</div>
                     <div className={style.card_textarea}>Steps: {input.steps}</div>
-                    {
-                        input.diets?.map( (d,i) => <span key={d}>{d}</span> )
-                    }
+                    <div class={style.container_diets}>
+                        <TypeDiets diets={input.diets} />
+                    </div>
                 </div>
             </div>
         </div>

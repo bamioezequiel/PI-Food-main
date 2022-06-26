@@ -63,6 +63,7 @@
     width: 100%;
     box-shadow: 0 2px 20px #e1e5ee;
     border-radius: 0.2rem;
+    padding-bottom: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -76,6 +77,10 @@
 
 .card h3 {
     padding: 0.2rem 1rem;
+
+}
+.card h4 {
+    padding: 0 1rem;
 }
 
 .card span {
@@ -89,5 +94,6 @@
     padding: 1rem;
 }
 
-/* .card p {
-} */
+.container_diets {
+    margin: 15px;
+}
