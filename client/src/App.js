@@ -13,7 +13,7 @@ function App() {
         <Route exact path='/' component={LandingPage} />
         <Route path='/' component={NavBar}/>
         <Route path='/home' component={Home} />
-        <Route path='/recipe/:id' component={DetailsRecipe} />
+        <Route path='/recipes/:id' component={DetailsRecipe} />
         <Route path='/create' component={CreateRecipe} />
       </React.Fragment>
   );

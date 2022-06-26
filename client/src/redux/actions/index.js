@@ -35,7 +35,7 @@ export const getAllRecipes = () => {
 export const getRecipeById = (id) => {
     return async function (dispatch) {
         try {
-            const res = await axios.get(`http://localhost:3001/recipes/${Number(id)}`);
+            const res = await axios.get(`http://localhost:3001/recipes/${id}`);
             return dispatch({ type:  GET_RECIPE_BY_ID, payload: res.data });
         } catch(error) {
             console.error(error);

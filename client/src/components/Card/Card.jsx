@@ -14,7 +14,7 @@ export default class Card extends React.Component {
                     <h2 className={style.title}>{this.props.name}</h2>
                     <TypeDiets diets={this.props.diets} /> 
                 </div>
-                <NavLink to={`/recipe/${this.props.id}`} className={style.btn}>More</NavLink>
+                <NavLink to={`/recipes/${this.props.id}`} className={style.btn}>More</NavLink>
             </div>            
         )
     }

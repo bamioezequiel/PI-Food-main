@@ -57,9 +57,10 @@ export default function CreateRecipe() {
         e.preventDefault();
         if(!input.name && !input.summary) {
             alert('Error in required fields');
+        } else {
+            dispatch(postRecipe(input));
+            alert(`Recipe was created successfully`);
         }
-        let res = await dispatch(postRecipe(input));
-        alert(`"${res.payload.name}" was created successfully`);
     }
 
     return (

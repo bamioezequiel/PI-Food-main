@@ -52,6 +52,14 @@ const getRecipeById = async (id) => {
     return await allInfo.filter( (el) => el.id == id );
 }
 
+const deleteRecipe = async (id) => {
+
+}
+
+const updateRecipe = async (id) => {
+    
+}
+
 const postRecipe = async ({name, summary, healthScore, dishTypes, steps, image, diets}) => {
     let [recipe, row] = await Recipe.findOrCreate({
         where: {
