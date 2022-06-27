@@ -10,7 +10,8 @@ const initialState = {
     recipes: [],
     filterRecipes: [],
     diest: [],
-    recipe: {}
+    recipe: {},
+    loading: true
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -24,7 +25,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload,
-                filterRecipes: JSON.parse(JSON.stringify(action.payload))  
+                filterRecipes: JSON.parse(JSON.stringify(action.payload))
             }
         case GET_RECIPE_BY_ID:
             return {

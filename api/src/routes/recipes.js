@@ -1,6 +1,10 @@
 const { Router } = require('express');
 const { Recipe } = require('./../db.js'); 
-const { getAllRecipes, getRecipeById, postRecipe } = require('./../controllers/index.js');
+const { getAllRecipes,
+        getRecipeById,
+        postRecipe,
+        deleteRecipe, 
+        updateRecipe} = require('./../controllers/index.js');
 const router = Router();
 
 module.exports = router;
@@ -32,7 +36,9 @@ router.get('/:idReceta', async (req, res) => {
 router.post('/', async (req, res) => {
     let { name, summary, healthScore, dishTypes, steps, image, diets } = req.body;
     try {
-        if(!name || !summary) { throw Error('No hay parametros suficientes para hacer esta petición'); };
+        if(!name || !summary) {
+            throw Error('No hay parametros suficientes para hacer esta petición');
+        };
         postRecipe({ name, summary, healthScore, dishTypes, steps, image, diets })
             .then( ([recipe, row]) => {
                 if(!row) { throw Error('La receta ya existe.'); }
@@ -40,6 +46,31 @@ router.post('/', async (req, res) => {
                 res.status(201).json(recipe);
             })
     } catch (error) {
+        res.status(404).json( { error: error.message } );
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    let { id } = req.params;
+    let { name, summary, healthScore, dishTypes, steps, image, diets } = req.body;
+    try {
+        if(!id || !name || !summary) {
+            throw Error('No hay parametros suficientes para hacer esta petición');
+        }
+        let updated = await updateRecipe({
+            id, name, summary, healthScore, dishTypes, steps, image, diets
+        });
+        res.json( (updated.length) ? `Se modificaron ${updated[0]} recetas` : 'No se modificaron recetas' );
+    } catch(error) {
+        res.status(404).json( { error: error.message } );
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    let { id } = req.params;
+    try {
+        res.json(await deleteRecipe(id));
+    } catch(error) {
         res.status(404).json( { error: error.message } );
     }
 });

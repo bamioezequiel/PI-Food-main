@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import TypeDiets from "../TypeDiets/TypeDiets.jsx";
 import { getDiets, postRecipe } from './../../redux/actions/index.js';
 import style from './CreateRecipe.module.css';
@@ -7,16 +8,15 @@ import Food404 from './../../assets/404Food.png';
 
 export default function CreateRecipe() {
 
-    // Validations
-
     const dispatch = useDispatch();
+    const history = useHistory();
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
         name: '',
         summary: '',
-        healthScore: '',
+        healthScore: 0,
         dishTypes: '',
-        steps: [],
+        steps: '',
         image: '',
         diets: []
     });
@@ -60,6 +60,7 @@ export default function CreateRecipe() {
         } else {
             dispatch(postRecipe(input));
             alert(`Recipe was created successfully`);
+            history.push('/home');
         }
     }
 
@@ -162,7 +163,10 @@ const validate = (input) => {
         errors.summary = 'Summary is not valid';
     }
 
-    if(input.healthScore < 0 || input.healthScore > 100) {
+    if(!input.healthScore === '') {
+        errors.healthScore = 'The health score is not valid';
+    }
+    else if(input.healthScore < 0 || input.healthScore > 100) {
         errors.healthScore = 'The health score cannot be less than 0 or greater than 100';
     }
     

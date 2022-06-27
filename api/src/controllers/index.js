@@ -53,11 +53,20 @@ const getRecipeById = async (id) => {
 }
 
 const deleteRecipe = async (id) => {
-
+   let res = await Recipe.destroy({
+       where: {
+           id
+        }
+    });
+    return res;
 }
 
-const updateRecipe = async (id) => {
-    
+const updateRecipe = async (recipe) => {
+    return await Recipe.update(recipe, {
+        where: {
+          id: recipe.id
+        }
+    });
 }
 
 const postRecipe = async ({name, summary, healthScore, dishTypes, steps, image, diets}) => {
@@ -103,4 +112,6 @@ module.exports = {
    getRecipeById,
    postRecipe,
    getDBDiets,
+   deleteRecipe,
+   updateRecipe
 }
