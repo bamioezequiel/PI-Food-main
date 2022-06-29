@@ -129,7 +129,7 @@ export default function CreateRecipe() {
                             ))
                         }
                     </div>
-                   
+                   {console.log(errors)}
                     {
                         (Object.keys(errors).length === 0 && (input.name && input.summary)) 
                         ? <button type="submit" onClick={ (e) => handleSubmit(e) } className={style.button}>Send</button>
@@ -140,7 +140,7 @@ export default function CreateRecipe() {
             </div>
             <div className={style.previus_recipe}>
                 <div className={style.card}>
-                    <img src={input.image ? input.image : Food404} id='img_create' width='300px' alt={input.name} />
+                    <img src={input.image} onError={ (e) => e.target.src = 'https://imgur.com/fqmPwAc.png'} id='img_create' width='300px' alt={input.name} />
                     <h3>Name: {input.name}</h3>
                     <h4>Dish types: {input.dishTypes}</h4>
                     <span>Health Score: {input.healthScore}</span>
@@ -155,11 +155,15 @@ export default function CreateRecipe() {
 
 const validate = (input) => {
     let errors = {};
-    if(!input.name) {
+    if(!/^[a-zA-Z\s]{4,50}$/.test(input.name)) {
         errors.name = 'Name is not valid';
     }
 
-    if(!input.summary) {
+    if(!/^[a-zA-Z\s]{4,20}$/.test(input.dishTypes)) {
+        errors.dishTypes = 'Dish types is not valid';
+    }
+
+    if(!/^[a-z0-9_-]{4,100}$/.test(input.summary)) {
         errors.summary = 'Summary is not valid';
     }
 
@@ -168,6 +172,9 @@ const validate = (input) => {
     }
     else if(input.healthScore < 0 || input.healthScore > 100) {
         errors.healthScore = 'The health score cannot be less than 0 or greater than 100';
+    }
+    else if(input.healthScore.toString().includes('.')) {
+        errors.healthScore = 'The health score cannot be a floating number';
     }
     
     return errors;

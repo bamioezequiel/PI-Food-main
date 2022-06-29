@@ -7,6 +7,19 @@ export const GET_DIETS = 'GET_DIETS';
 export const FILTER_BY_DIEST = 'FILTER_BY_DIEST';
 export const ORDER_RECIPES = 'ORDER_RECIPES';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
+export const UPDATE_RECIPE = 'UPDATE_RECIPE';
+export const DELETE_RECIPE = 'DELETE_RECIPE';
+
+export const deleteRecipe = (id) => {
+    return async function(dispatch) {
+        try {
+            let res = axios.delete(`http://localhost:3001/recipes/${id}`); 
+            return dispatch({ type: DELETE_RECIPE, payload: res });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
 
 export const postRecipe = (recipe) => {
     return async function(dispatch) {

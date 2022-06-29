@@ -36,7 +36,6 @@ export default function Search({ pagination }) {
                                     className={style.button_icon}>
                                 <img src={icon} className={style.icon} alt='icon search not found' />
                             </button>
-                            
                         </td>
                     </tr>
                 </tbody>

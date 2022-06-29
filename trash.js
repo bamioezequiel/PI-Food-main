@@ -1,8 +1,20 @@
+/* 
+    Update
+    Mejorar filters
+    Optimizar codigo
+
+    Search:
+        mesensajhe de cuando no encuentra recetas
+    Validaciones del formulario:
+        image
+        float healthscore
+    
+*/
+
 const getApiRecipeById = async (id) => {
     let apiRecipe = await axios.get(`${url}/${id}/information?apiKey=${API_KEY}`);
     let recipe = apiRecipe.data;
-    console.log(recipe)
-    return { 
+    return {
         name:           recipe.title, 
         summary:        recipe.summary.replace( /(<([^>]+)>)/ig, ''), 
         healthScore:    recipe.healthScore, 

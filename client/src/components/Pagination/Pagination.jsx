@@ -13,13 +13,13 @@ export default function Pagination({ currentPage, recipesPage, recipes, paginati
                 pageNumbers.length > 0 && <h5>Page: {currentPage} / {pageNumbers.length}</h5>
             }
             <div className={style.container_pagination}> 
-            {   
+            { 
                 pageNumbers.length > 1 && <button key='prev' 
                 className={style.pagination_page} 
                 onClick={ () => {
                     if(currentPage > 1) { pagination(currentPage-1); }
                 } }>&lt;</button> 
-            } 
+            }
                 
             {
                 pageNumbers?.map( (el) => {
@@ -30,12 +30,13 @@ export default function Pagination({ currentPage, recipesPage, recipes, paginati
                 })
             }
 
-               { 
+            { 
                 pageNumbers.length > 1 && <button key='next' 
                 className={style.pagination_page} 
                 onClick={ () => {
                     if(currentPage < pageNumbers.length) {  pagination(currentPage+1); } 
-                }}>&gt;</button>}
+                }}>&gt;</button>
+            }
             </div>
         </div>
     )

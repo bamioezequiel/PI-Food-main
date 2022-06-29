@@ -40,6 +40,20 @@
 }
 
 .back:hover {
-    padding: 7px 12px;
     background-color: #df0808;
+}
+
+.btn_delete {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #df0808;
+    border: none;
+    cursor: pointer;
+}
+
+.btn_delete:hover {
+    padding: 7px;
 }
