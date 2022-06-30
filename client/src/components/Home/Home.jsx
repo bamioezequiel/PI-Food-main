@@ -18,7 +18,9 @@ export default function Home() {
         <div className={style.container}>
             <div className={style.cards}>
                 {
-                   (loading) ? <Loading /> : <Cards recipes={allRecipes} />
+                   (loading) 
+                   ? <Loading /> 
+                   : <Cards recipes={allRecipes} />
                 }
             </div>  
         </div>

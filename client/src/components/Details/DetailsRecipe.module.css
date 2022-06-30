@@ -15,10 +15,15 @@
 .summary,
 .steps {
     margin-left: 250px;
+    word-wrap: break-word;
+}
+
+.steps {
+    margin: auto;
 }
 
 .step {
-    width: 75%;
+    width: 800px;
     margin: 10px 0;
 }
 

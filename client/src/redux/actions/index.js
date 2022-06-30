@@ -7,8 +7,14 @@ export const GET_DIETS = 'GET_DIETS';
 export const FILTER_BY_DIEST = 'FILTER_BY_DIEST';
 export const ORDER_RECIPES = 'ORDER_RECIPES';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
-export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
+export const CLEAN_RECIPE = 'CLEAN_RECIPE';
+
+export const cleanRecipe = () => {
+    return function(dispatch) {
+        return dispatch({ type: CLEAN_RECIPE })
+    }
+}
 
 export const deleteRecipe = (id) => {
     return async function(dispatch) {

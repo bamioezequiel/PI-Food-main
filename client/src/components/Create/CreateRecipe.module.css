@@ -1,6 +1,7 @@
 .container {
     display: flex;
     justify-content: space-between;
+    word-wrap: break-word;
 }
 
 .form_container {
@@ -88,7 +89,7 @@
     padding: 0.2rem 1rem;
 
 }
-.card h4 {
+.card h5 {
     padding: 0 1rem;
 }
 
@@ -97,9 +98,6 @@
 }
 
 .card_textarea {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
     padding: 1rem;
 }
 

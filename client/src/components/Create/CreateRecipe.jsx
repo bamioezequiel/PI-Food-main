@@ -78,6 +78,9 @@ export default function CreateRecipe() {
                         onChange={ (e) => handleChange(e) }
                         className={`${style.input_box} ${errors.name && style.form_error}`} 
                         placeholder="Name..." />
+                    {
+                        errors.dishTypes && <span className={style.form_message_error}>{errors.dishTypes}</span>
+                    }
                     <input type="text" 
                         name="dishTypes" 
                         value={input.dishTypes} 
@@ -129,7 +132,6 @@ export default function CreateRecipe() {
                             ))
                         }
                     </div>
-                   {console.log(errors)}
                     {
                         (Object.keys(errors).length === 0 && (input.name && input.summary)) 
                         ? <button type="submit" onClick={ (e) => handleSubmit(e) } className={style.button}>Send</button>
@@ -142,7 +144,7 @@ export default function CreateRecipe() {
                 <div className={style.card}>
                     <img src={input.image} onError={ (e) => e.target.src = 'https://imgur.com/fqmPwAc.png'} id='img_create' width='300px' alt={input.name} />
                     <h3>Name: {input.name}</h3>
-                    <h4>Dish types: {input.dishTypes}</h4>
+                    <h5>Dish types: {input.dishTypes}</h5>
                     <span>Health Score: {input.healthScore}</span>
                     <div className={style.card_textarea}>Summary: {input.summary}</div>
                     <div className={style.card_textarea}>Steps: {input.steps}</div>
@@ -159,11 +161,11 @@ const validate = (input) => {
         errors.name = 'Name is not valid';
     }
 
-    if(!/^[a-zA-Z\s]{4,20}$/.test(input.dishTypes)) {
+    if(input.dishTypes.length > 30) { //fix
         errors.dishTypes = 'Dish types is not valid';
     }
 
-    if(!/^[a-z0-9_-]{4,100}$/.test(input.summary)) {
+    if(!/^[a-zA-Z0-9_-]{4,200}$/.test(input.summary)) {
         errors.summary = 'Summary is not valid';
     }
 
@@ -179,37 +181,3 @@ const validate = (input) => {
     
     return errors;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-if(!/(.jpg|.jpeg|.png)$/i.test(input.image)) {
-        let img = document.querySelector('#img_create');
-        if(img.naturalHeight === 0 || img.naturalHeight === 404) {
-            errors.image = 'Image is not valid';
-        }
-    }
-*/

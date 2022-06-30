@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         let recipes = await getAllRecipes();
         if(!name) { return res.status(200).json(recipes); }
         const filteredRecipes = recipes.filter( (el) => el.name.toLowerCase().includes(name.toLowerCase()) );
-        if(filteredRecipes.length === 0) { throw Error('No hay recetas para mostrar.')  }
+        if(filteredRecipes.length === 0) { return res.status(200).json('No recipes found.');  }
         return res.status(200).json(filteredRecipes);
     } catch (error) {
         return res.status(404).json( { error: error.message } );

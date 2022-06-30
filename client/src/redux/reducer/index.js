@@ -5,12 +5,13 @@ import { GET_ALL_RECIPES,
          ORDER_RECIPES, 
          SEARCH_BY_NAME, 
          POST_RECIPE,
-         DELETE_RECIPE} from './../actions/index.js';
+         DELETE_RECIPE,
+         CLEAN_RECIPE} from './../actions/index.js';
 
 const initialState = {
     recipes: [],
     filterRecipes: [],
-    aux: [],
+    allRecipes: [],
     diest: [],
     recipe: {},
 }
@@ -30,7 +31,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload,
-                aux: JSON.parse(JSON.stringify(action.payload)),
+                allRecipes: JSON.parse(JSON.stringify(action.payload)),
                 filterRecipes: JSON.parse(JSON.stringify(action.payload))
             }
         case GET_RECIPE_BY_ID:
@@ -44,40 +45,42 @@ const rootReducer = (state = initialState, action) => {
                 diets: action.payload
             }
         case FILTER_BY_DIEST:
-            state.aux = (action.payload === 'all') 
-                                  ? state.filterRecipes 
-                                  : state.filterRecipes.filter( (el) => el.diets.includes(action.payload) );
+            const allRecipes = state.filterRecipes;
+            const dietsFilter = (action.payload === 'all') 
+                                  ? state.allRecipes 
+                                  : allRecipes.filter( (el) => el.diets.includes(action.payload) );
             return {
                 ...state,
-                recipes: state.aux
+                recipes: dietsFilter
             }
         case ORDER_RECIPES:
-            let filterAlpha = [];
             switch(action.payload) {
                 case 'asc':
-                    filterAlpha = state.aux.sort( (a,b) => a.name.localeCompare(b.name) );
-                    break;
+                    state.recipes.sort( (a,b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()) );
+                break;
                 case 'des':
-                    filterAlpha = state.aux.sort( (a,b) => b.name.localeCompare(a.name) );
-                    break;
+                    state.recipes.sort( (a,b) => b.name.toLowerCase().localeCompare(a.name.toLowerCase()) );
+                break;
                 case 'ascScore':
-                    filterAlpha = state.aux.sort( (a,b) => b.healthScore - a.healthScore );
-                    break;
+                    state.recipes.sort( (a,b) => b.healthScore - a.healthScore );
+                break;
                 case 'desScore':
-                    filterAlpha = state.aux.sort( (a,b) => a.healthScore - b.healthScore );
-                    break;
-                default:
-                    filterAlpha = state.filterRecipes;
-                    break;
+                    state.recipes.sort( (a,b) => a.healthScore - b.healthScore );
+                break;
             }
             return {
                 ...state,
-                recipes: [...filterAlpha]
+                recipes: state.recipes
             }
         case SEARCH_BY_NAME:
             return {
                 ...state,
-                recipes: action.payload      
+                recipes: (typeof action.payload === 'string') ? [] : action.payload   
+            }
+        case CLEAN_RECIPE:
+            return {
+                ...state,
+                recipes: state.allRecipes
             }
         default:
             return ({ ...state });

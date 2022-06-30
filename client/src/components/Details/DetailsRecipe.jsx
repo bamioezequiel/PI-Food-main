@@ -49,10 +49,9 @@ export default function DetailsRecipe() {
         }
         <div className={style.steps}>
             {
-                typeof recipe.steps === 'string'
+                (typeof recipe.steps === 'string')
                 ? <p className={style.step}>{recipe.steps}</p>
-                : <ol>{recipe.steps?.map( (el, i) => <li key={i} className={style.step}>{el}</li> )}</ol>
-                
+                : <ol>{recipe.steps?.map( (el, i) => <li key={i} className={style.step}><p>{el}</p></li> )}</ol>
             }
         </div>
     </div>

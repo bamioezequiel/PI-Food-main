@@ -4,7 +4,7 @@ import icon from './../../assets/search.png';
 import { useDispatch } from "react-redux";
 import { searchByName } from "../../redux/actions";
 
-export default function Search({ pagination }) {
+export default function Search({ pagination, cleanSelector }) {
 
     const dispatch = useDispatch();
     const [value, setValue] = useState('');
@@ -18,6 +18,7 @@ export default function Search({ pagination }) {
         if(value !== '') {
             await dispatch(searchByName(value));
             pagination(1);
+            cleanSelector();
             setValue('');
         }
     }
