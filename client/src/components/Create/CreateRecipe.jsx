@@ -86,6 +86,9 @@ export default function CreateRecipe() {
                         onChange={ (e) => handleChange(e) }
                         className={style.input_box} 
                         placeholder="Dish types..." />
+                    {
+                        errors.image && <span className={style.form_message_error}>{errors.image}</span>
+                    }
                     <input type="text"
                         name="image" 
                         value={input.image} 
@@ -160,19 +163,29 @@ export default function CreateRecipe() {
 const validate = (input) => {
     //errores mas descriptivos
     let errors = {};
-    if(!/^[a-zA-Z\s]{4,50}$/.test(input.name)) {
-        errors.name = 'Name is not valid';
+    if(!input.name) {
+        errors.name = 'Name cannot be empty';
+    }
+    else if(input.name.length > 100) {
+        errors.name = 'Name cannot be more than 100 characters';
     }
 
-    if(input.dishTypes.length > 30) { //fix
-        errors.dishTypes = 'Dish types is not valid';
-    }
-    //validar que sea espacio
-    if(!/^[a-zA-Z0-9_-]{4,700}$/.test(input.summary)) {
-        errors.summary = 'Summary is not valid';
+    if(input.image.length > 150) { 
+        errors.image = 'Image cannot be more than 150 characters';
     }
 
-    if(!/^[a-zA-Z0-9_-]{0,700}$/.test(input.steps)) {
+    if(input.dishTypes.length > 100) {
+        errors.dishTypes = 'Dish types cannot be more than 100 characters';
+    }
+
+    if(!input.summary) {
+        errors.summary = 'Summary cannot be empty';
+    }
+    else if(input.summary.length > 700) {
+        errors.summary = 'Summary cannot exceed 700 characters';
+    }
+
+    if(input.steps.length > 1000) {
         errors.steps = 'Steps cannot exceed 1000 characters';
     }
 
@@ -183,7 +196,7 @@ const validate = (input) => {
         errors.healthScore = 'The health score cannot be less than 0 or greater than 100';
     }
     else if(input.healthScore.toString().includes('.')) {
-        errors.healthScore = 'The health score cannot be a floating number';
+        errors.healthScore = 'The health score cannot be a decimal number';
     }
     
     return errors;

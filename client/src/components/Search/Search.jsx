@@ -22,14 +22,24 @@ export default function Search({ pagination, cleanSelector }) {
             setValue('');
         }
     }
-//agregar enter
+
+    const handleKeyDown = (e) => {
+        if(e.keyCode === 13) {
+            handleSubmit(e);
+        }
+    }
+
     return (
         <div className={style.container_search}>
             <table className={style.elements}>
                 <tbody>
                     <tr>
                         <td>
-                            <input type="text" value={value} onChange={ (e) => handleSearch(e) } className={style.search} placeholder='Search' />
+                            <input type="text" value={value} 
+                            onChange={ (e) => handleSearch(e) }
+                            onKeyDown={ (e) => handleKeyDown(e) }
+                            className={style.search}
+                            placeholder='Search' />
                         </td>
                         <td>
                             <button type='submit'

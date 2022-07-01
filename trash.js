@@ -1,6 +1,21 @@
 /* 
     Optimizar codigo
-*/
+
+    <NavLink to='/home' className={style.back}>Back</NavLink>
+
+.back {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #ff0000;
+    box-shadow: 0 2px 5px #000000;
+    transition: all ease-in 120ms;
+}
+
+.back:hover {
+    background-color: #df0808;
+}
 
 const getApiRecipeById = async (id) => {
     let apiRecipe = await axios.get(`${url}/${id}/information?apiKey=${API_KEY}`);
@@ -27,3 +42,5 @@ const getDBDiets = () => {
         .then( () => Diet.findAll() )
         .catch( (error) => console.error(error) )
 } 
+
+*/
