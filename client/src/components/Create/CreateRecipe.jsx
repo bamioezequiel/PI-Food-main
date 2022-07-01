@@ -158,6 +158,7 @@ export default function CreateRecipe() {
 }
 
 const validate = (input) => {
+    //errores mas descriptivos
     let errors = {};
     if(!/^[a-zA-Z\s]{4,50}$/.test(input.name)) {
         errors.name = 'Name is not valid';
@@ -166,7 +167,7 @@ const validate = (input) => {
     if(input.dishTypes.length > 30) { //fix
         errors.dishTypes = 'Dish types is not valid';
     }
-
+    //validar que sea espacio
     if(!/^[a-zA-Z0-9_-]{4,700}$/.test(input.summary)) {
         errors.summary = 'Summary is not valid';
     }

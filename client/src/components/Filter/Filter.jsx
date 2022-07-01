@@ -66,7 +66,7 @@ export default function Filter({ pagination, setRender }) {
             </div>
             
             <div className={style.container_btn_clean}>
-                <button onClick={ (e) => handlerClean(e) } className={style.btn_clean}  >Clean</button>
+                <button onClick={ (e) => handlerClean(e) } className={style.btn_clean}  >Clear</button>
             </div>
         </div>
     )
