@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import DetailsRecipe from './components/Details/DetailsRecipe.jsx';
 import CreateRecipe from './components/Create/CreateRecipe.jsx';
 import LandingPage from './components/LandingPage/LandingPage.jsx';
@@ -9,13 +9,15 @@ import './App.css';
 
 function App() {
   return (
-      <React.Fragment>
+    <React.Fragment>
+      <Route path='/home' component={NavBar}/>
+      <Switch>
         <Route exact path='/' component={LandingPage} />
-        <Route path='/' component={NavBar}/>
-        <Route path='/home/:id' component={DetailsRecipe} />
+        <Route path='/home/recipe/:id' component={DetailsRecipe} />
         <Route exact path='/home' component={Home} />
-        <Route path='/create' component={CreateRecipe} />
-      </React.Fragment>
+        <Route path='/home/create' component={CreateRecipe} />
+      </Switch>
+    </React.Fragment>
   );
 }
 

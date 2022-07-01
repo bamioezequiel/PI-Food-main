@@ -32,14 +32,14 @@ export default function DetailsRecipe() {
     : <div className={style.container}>
         {
             recipe.createInDB && <div>
-                <button tton onClick={ (e) => handleDelete(e) } className={style.btn_delete}>
-                    <img src='https://img.icons8.com/material-rounded/24/ffffff/filled-trash.png' alt="" />
+                <button onClick={ (e) => handleDelete(e) } className={style.btn_delete}>
+                    <img src='https://img.icons8.com/material-rounded/24/ffffff/filled-trash.png' alt="delete image not found" />
                 </button>
             </div>
         }
         <h1 className={style.title}> {recipe.name} </h1>
         {
-            recipe.dishTypes && <h3>{recipe.dishTypes}</h3>
+            recipe.dishTypes && <h3 className={style.title}>{recipe.dishTypes}</h3>
         }
         <h5>Health score: {recipe.healthScore}</h5>
         <img src={recipe.image} onError={ (e) =>  e.target.src = 'https://imgur.com/fqmPwAc.png'} className={style.image} alt={`${recipe.name} not found`} />

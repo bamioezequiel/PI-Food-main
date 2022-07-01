@@ -30,3 +30,12 @@
     border-color: #fbb304;
     background-color: #fbb304;
 }
+
+@media (max-width: 600px) {
+    .container_pagination {
+        flex-wrap: wrap;
+    }
+    .container_pagination * {
+        margin-bottom: 5px;
+    }
+}

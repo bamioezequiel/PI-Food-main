@@ -7,6 +7,11 @@
     align-items: center;
 }
 
+.title {
+    width: 80%;
+    text-align: center;
+}
+
 .image {
     width: 315px;
     border-radius: 10px;
@@ -14,16 +19,15 @@
 
 .summary,
 .steps {
-    margin-left: 250px;
     word-wrap: break-word;
 }
 
 .steps {
-    margin: auto;
+    width: 60%;
 }
 
 .step {
-    width: 800px;
+    width: 100%;
     margin: 10px 0;
 }
 

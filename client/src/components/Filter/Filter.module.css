@@ -53,3 +53,17 @@
     border-color: #fbb304;
     background-color: #fbb304;
 }
+
+@media (max-width: 600px) {
+    .container_filter {
+        flex-direction: column;
+    }
+
+    .container_filter select {
+        margin: 10px auto;
+    }
+    
+    .filter {
+        width: 70%;
+    }
+}

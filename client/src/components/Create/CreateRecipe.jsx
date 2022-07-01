@@ -6,7 +6,7 @@ import { getDiets, postRecipe } from './../../redux/actions/index.js';
 import style from './CreateRecipe.module.css';
 
 export default function CreateRecipe() {
-
+    //put
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState({});
@@ -57,6 +57,7 @@ export default function CreateRecipe() {
         if(!input.name && !input.summary) {
             alert('Error in required fields');
         } else {
+            console.log(input)
             dispatch(postRecipe(input));
             alert(`Recipe was created successfully`);
             history.push('/home');
@@ -91,7 +92,7 @@ export default function CreateRecipe() {
                     }
                     <input type="text"
                         name="image" 
-                        value={input.image} 
+                        value={ input.image } 
                         onChange={ (e) => handleChange(e) }
                         className={style.input_box} 
                         placeholder="https://image.png" />
@@ -147,7 +148,9 @@ export default function CreateRecipe() {
             </div>
             <div className={style.previus_recipe}>
                 <div className={style.card}>
-                    <img src={input.image} onError={ (e) => e.target.src = 'https://imgur.com/fqmPwAc.png'} id='img_create' width='300px' alt={input.name} />
+                    <img src={input.image} 
+                    onError={ (e) => e.target.src = 'https://imgur.com/fqmPwAc.png' } 
+                    id='img_create' width='300px' alt={input.name} />
                     <h3>Name: {input.name}</h3>
                     <h5>Dish types: {input.dishTypes}</h5>
                     <span>Health Score: {input.healthScore}</span>
@@ -161,7 +164,6 @@ export default function CreateRecipe() {
 }
 
 const validate = (input) => {
-    //errores mas descriptivos
     let errors = {};
     if(!input.name) {
         errors.name = 'Name cannot be empty';
