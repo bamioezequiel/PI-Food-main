@@ -104,9 +104,6 @@ const getDBDiets = async () => {
     return await Diet.findAll();
 }
 
-
-
-
 module.exports = {
    getApiRecipes,
    getBDRecipes,

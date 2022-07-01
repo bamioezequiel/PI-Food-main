@@ -33,7 +33,7 @@ export default function DetailsRecipe() {
         {
             recipe.createInDB && <div>
                 <button onClick={ (e) => handleDelete(e) } className={style.btn_delete}>
-                    <img src='https://img.icons8.com/material-rounded/24/ffffff/filled-trash.png' alt="delete image not found" />
+                    <img src='https://imgur.com/aj8PEHd.png' alt="delete image not found" />
                 </button>
             </div>
         }
@@ -52,7 +52,8 @@ export default function DetailsRecipe() {
             {
                 (typeof recipe.steps === 'string')
                 ? <p className={style.step}>{recipe.steps}</p>
-                : <ol>{recipe.steps?.map( (el, i) => <li key={i} className={style.step}><p>{el}</p></li> )}</ol>
+                : <ol>{
+                        recipe.steps?.map( (el, i) => <li key={i} className={style.step}><p>{el}</p></li> )}</ol>
             }
         </div>
     </div>
