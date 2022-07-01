@@ -45,7 +45,7 @@ const rootReducer = (state = initialState, action) => {
                 diets: action.payload
             }
         case FILTER_BY_DIEST:
-            const allRecipes = state.filterRecipes;
+            const allRecipes = state.allRecipes;
             const dietsFilter = (action.payload === 'all') 
                                   ? state.allRecipes 
                                   : allRecipes.filter( (el) => el.diets.includes(action.payload) );

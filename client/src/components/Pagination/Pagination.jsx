@@ -3,7 +3,7 @@ import style from './Pagination.module.css';
 
 export default function Pagination({ currentPage, recipesPage, recipes, pagination }) {    
     const pageNumbers = [];
-    for(let i = 1; i < Math.ceil(recipes/recipesPage); i++) {
+    for(let i = 1; i < Math.ceil(recipes/recipesPage)+1; i++) {
         pageNumbers.push(i);
     }
 

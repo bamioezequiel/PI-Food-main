@@ -1,17 +1,5 @@
 /* 
-    Update
-    Mejorar filters
     Optimizar codigo
-
-    Search:
-        mesensajhe de cuando no encuentra recetas
-        REducer: typeof action.payload === 'string' ? [] : action.payload 
-    Validaciones del formulario:
-        image
-        float healthscore
-
-    
-    
 */
 
 const getApiRecipeById = async (id) => {

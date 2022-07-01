@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import TypeDiets from "../TypeDiets/TypeDiets.jsx";
 import { getDiets, postRecipe } from './../../redux/actions/index.js';
 import style from './CreateRecipe.module.css';
-import Food404 from './../../assets/404Food.png';
 
 export default function CreateRecipe() {
 
@@ -107,6 +106,9 @@ export default function CreateRecipe() {
                     {
                         errors.summary && <span className={style.form_message_error}>{errors.summary}</span>
                     }
+                    {
+                        errors.steps && <span className={style.form_message_error}>{errors.steps}</span>
+                    }
                     <div className={style.form_textarea}>
                         <textarea name="summary" 
                             value={input.summary} 
@@ -165,8 +167,12 @@ const validate = (input) => {
         errors.dishTypes = 'Dish types is not valid';
     }
 
-    if(!/^[a-zA-Z0-9_-]{4,200}$/.test(input.summary)) {
+    if(!/^[a-zA-Z0-9_-]{4,700}$/.test(input.summary)) {
         errors.summary = 'Summary is not valid';
+    }
+
+    if(!/^[a-zA-Z0-9_-]{0,700}$/.test(input.steps)) {
+        errors.steps = 'Steps cannot exceed 1000 characters';
     }
 
     if(!input.healthScore === '') {

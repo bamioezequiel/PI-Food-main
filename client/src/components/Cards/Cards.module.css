@@ -1,3 +1,9 @@
+.container_pagination {
+    width: 100%;
+    background-color: red;
+    margin: 0 auto;
+}
+
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
