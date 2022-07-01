@@ -28,7 +28,7 @@ export default function DetailsRecipe() {
      
    return (
     loading ? <Loading /> : <div className={style.container}>
-        <NavLink to='/home' className={style.back}>X</NavLink>
+        <NavLink to='/home' className={style.back}>Back</NavLink>
         {
             recipe.createInDB && <div>
                 <button tton onClick={ (e) => handleDelete(e) } className={style.btn_delete}>

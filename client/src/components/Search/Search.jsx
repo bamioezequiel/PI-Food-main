@@ -22,7 +22,7 @@ export default function Search({ pagination, cleanSelector }) {
             setValue('');
         }
     }
-
+//agregar enter
     return (
         <div className={style.container_search}>
             <table className={style.elements}>
