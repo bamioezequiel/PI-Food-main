@@ -9,11 +9,23 @@ export const FILTER_BY_DIEST = 'FILTER_BY_DIEST';
 export const ORDER_RECIPES = 'ORDER_RECIPES';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
+export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 export const CLEAN_RECIPE = 'CLEAN_RECIPE';
 
 export const cleanRecipe = () => {
     return function(dispatch) {
         return dispatch({ type: CLEAN_RECIPE })
+    }
+}
+
+export const updateRecipe = (recipe) => {
+    return async function(dispatch) {
+        try {
+          let res = axios.put(`${URL}recipes`, recipe);
+          return dispatch({ type: UPDATE_RECIPE })  
+        } catch(error) {
+            console.error(error);
+        }
     }
 }
 

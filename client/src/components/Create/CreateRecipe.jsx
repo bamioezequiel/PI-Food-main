@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import TypeDiets from "../TypeDiets/TypeDiets.jsx";
-import { getDiets, postRecipe } from './../../redux/actions/index.js';
+import { getDiets, getRecipeById, postRecipe, updateRecipe } from './../../redux/actions/index.js';
 import style from './CreateRecipe.module.css';
 
 export default function CreateRecipe() {
     //put
+    const { id } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
+    const diets = useSelector( (state) => state.diets );
+    const recipeUpdate = useSelector( (state) => state.recipe );
     const [errors, setErrors] = useState({});
-    const [input, setInput] = useState({
+    const [input, setInput] = useState((id) ? recipeUpdate : {
         name: '',
         summary: '',
         healthScore: 0,
@@ -20,10 +23,10 @@ export default function CreateRecipe() {
         diets: []
     });
  
-    const diets = useSelector( (state) => state.diets );
     
     useEffect( () => {
         dispatch(getDiets());
+        dispatch(getRecipeById(id));
     }, [dispatch])
 
     const handleChange = (e) => {
@@ -57,9 +60,13 @@ export default function CreateRecipe() {
         if(!input.name && !input.summary) {
             alert('Error in required fields');
         } else {
-            console.log(input)
-            dispatch(postRecipe(input));
-            alert(`Recipe was created successfully`);
+            if(id) {
+                dispatch(updateRecipe(input)) 
+                alert(`Recipe was updated successfully`);
+            } else {
+                dispatch(postRecipe(input));
+                alert(`Recipe was created successfully`);
+            }
             history.push('/home');
         }
     }

@@ -6,7 +6,8 @@ import { GET_ALL_RECIPES,
          SEARCH_BY_NAME, 
          POST_RECIPE,
          DELETE_RECIPE,
-         CLEAN_RECIPE} from './../actions/index.js';
+         CLEAN_RECIPE,
+         UPDATE_RECIPE} from './../actions/index.js';
 
 const initialState = {
     recipes: [],
@@ -18,6 +19,10 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        case UPDATE_RECIPE:
+            return {
+                ...state
+            }
         case DELETE_RECIPE:
             return {
                 ...state

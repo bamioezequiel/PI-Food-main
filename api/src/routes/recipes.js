@@ -50,9 +50,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
-    let { id } = req.params;
-    let { name, summary, healthScore, dishTypes, steps, image, diets } = req.body;
+router.put('/', async (req, res) => {
+    let { id, name, summary, healthScore, dishTypes, steps, image, diets } = req.body;
     try {
         if(!id || !name || !summary) {
             throw Error('No hay parametros suficientes para hacer esta petición');
