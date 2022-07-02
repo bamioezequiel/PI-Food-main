@@ -152,7 +152,10 @@ export default function CreateRecipe() {
                         {
                             diets?.map( (d) => (
                                 <div key={d.id} className={style.diet}>
-                                    <input type="checkbox" checked={input.diets?.includes(d.name)} onChange={ (e) => handleCheck(e) } name={d.name} id={d.id} />
+                                    <input type="checkbox" 
+                                        checked={input.diets?.includes(d.name)} 
+                                        onChange={ (e) => handleCheck(e) } 
+                                        name={d.name} id={d.id} />
                                     <label htmlFor={d.id}>{d.name}</label>
                                 </div>
                             ))
