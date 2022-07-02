@@ -97,7 +97,7 @@ export default function CreateRecipe() {
                         value={input.name} 
                         onChange={ (e) => handleChange(e) }
                         className={`${style.input_box} ${errors.name && style.form_error}`} 
-                        placeholder="Name..." />
+                        placeholder="* Name..." />
                     {
                         errors.dishTypes && <span className={style.form_message_error}>{errors.dishTypes}</span>
                     }
@@ -139,13 +139,13 @@ export default function CreateRecipe() {
                             onChange={ (e) => handleChange(e) }
                             className={`${style.input_box} ${errors.summary && style.form_error}`} 
                             cols="30" rows="10" 
-                            placeholder="Summary"></textarea>
+                            placeholder="* Summary..."></textarea>
                         <textarea name="steps" 
                             value={input.steps} 
                             onChange={ (e) => handleChange(e) }
                             className={style.input_box} 
                             cols="30" rows="10" 
-                            placeholder="Steps"></textarea>
+                            placeholder="Steps..."></textarea>
                     </div>
 
                     <div className={style.type_diets}>
@@ -199,7 +199,7 @@ const validate = (input) => {
         errors.steps = 'Steps cannot exceed 1000 characters';
     }
 
-    if(!input.healthScore === '') {
+    if(!input.healthScore) {
         errors.healthScore = 'The health score is not valid';
     }
     else if(input.healthScore < 0 || input.healthScore > 100) {
