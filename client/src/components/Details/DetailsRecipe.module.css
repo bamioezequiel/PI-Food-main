@@ -60,3 +60,7 @@
     color: #fff;
     background-color: #fbb304;
 }
+
+.btn_update:hover {
+    padding: 7px;
+}

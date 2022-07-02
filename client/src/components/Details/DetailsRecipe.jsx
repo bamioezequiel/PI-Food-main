@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import Food404 from './../../assets/404Food.png';
 import style from './DetailsRecipe.module.css';
+import Error404 from "../404/Error404.jsx";
 
 export default function DetailsRecipe() {
     let { id } = useParams();
@@ -29,7 +30,8 @@ export default function DetailsRecipe() {
    return (
     (loading) 
     ? <Loading /> 
-    : <div className={style.container}>
+    : (Object.keys(recipe).length) 
+        ? <div className={style.container}>
         {
             recipe.createInDB && <div>
                 <button onClick={ (e) => handleDelete(e) } className={style.btn_delete}>
@@ -60,5 +62,6 @@ export default function DetailsRecipe() {
             }
         </div>
     </div>
+        : <Error404/>
    )
 }
