@@ -40,10 +40,9 @@ router.post('/', async (req, res) => {
             throw Error('No hay parametros suficientes para hacer esta petición');
         };
         postRecipe({ name, summary, healthScore, dishTypes, steps, image, diets })
-            .then( ([recipe, row]) => {
-                if(!row) { throw Error('La receta ya existe.'); }
+            .then( (recipe) => {
 
-                res.status(201).json(recipe);
+                res.status(201).json(`${recipe.name} fue creado.`);
             })
     } catch (error) {
         res.status(404).json( { error: error.message } );
@@ -56,9 +55,11 @@ router.put('/', async (req, res) => {
         if(!id || !name || !summary) {
             throw Error('No hay parametros suficientes para hacer esta petición');
         }
+        console.log(id, diets)
         let updated = await updateRecipe({
             id, name, summary, healthScore, dishTypes, steps, image, diets
         });
+        console.log(updated)
         res.json( (updated.length) ? `Se modificaron ${updated[0]} recetas` : 'No se modificaron recetas' );
     } catch(error) {
         res.status(404).json( { error: error.message } );

@@ -62,32 +62,55 @@ const deleteRecipe = async (id) => {
 }
 
 const updateRecipe = async (recipe) => {
-    return await Recipe.update(recipe, {
+    let countUpdated = await Recipe.update(recipe, {
         where: {
-          id: recipe.id
+            id: recipe.id
         }
     });
+
+    let recipeUpdated = await Recipe.findOne({
+        where: {
+          id: recipe.id
+        },
+        include: Diet
+      });
+
+    let dietsDB = await Diet.findAll({
+        where: { name: recipe.diets },
+    });
+    await recipeUpdated.diets.map((d) => recipeUpdated.removeDiets(d));
+    await dietsDB.map( async (d) => await recipeUpdated.addDiets(d));
+    await recipeUpdated.reload();
+
+    return countUpdated;
 }
 
 const postRecipe = async ({name, summary, healthScore, dishTypes, steps, image, diets}) => {
-    let [recipe, row] = await Recipe.findOrCreate({
-        where: {
-            name,
-            summary,
-            healthScore,
-            dishTypes,
-            steps,
-            image
-        }
+    // let [recipe, row] = await Recipe.findOrCreate({
+    //     where: {
+    //         name,
+    //         summary,
+    //         healthScore,
+    //         dishTypes,
+    //         steps,
+    //         image
+    //     }
+    // });
+    // if(!row) { return [undefined, row] };
+    let recipe = await Recipe.create({
+        name,
+        summary,
+        healthScore,
+        dishTypes,
+        steps,
+        image
     });
-    if(!row) { return [undefined, row] };
-
     let dietsDB = await Diet.findAll({
         where: { name: diets },
     });
 
     recipe.addDiet(dietsDB);
-    return [recipe, row]; 
+    return recipe; 
 }
 
 /* ------------------------------------------- */

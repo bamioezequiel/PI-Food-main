@@ -35,8 +35,9 @@ export default function DetailsRecipe() {
                 <button onClick={ (e) => handleDelete(e) } className={style.btn_delete}>
                     <img src='https://imgur.com/aj8PEHd.png' alt="delete image not found" />
                 </button>
-                {console.log(id)}
-                <NavLink to={`/home/create/${id}`}  className={style.btn_update} >Update</NavLink>
+                <NavLink to={`/home/create/${id}`}  className={style.btn_update}>
+                    <img src="https://imgur.com/qV1MFWh.png" alt="update image not found" />
+                </NavLink>
             </div>
         }
         <h1 className={style.title}> {recipe.name} </h1>
