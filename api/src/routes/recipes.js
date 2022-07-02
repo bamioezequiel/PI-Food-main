@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         let recipes = await getAllRecipes();
         if(!name) { return res.status(200).json(recipes); }
         const filteredRecipes = recipes.filter( (el) => el.name.toLowerCase().includes(name.toLowerCase()) );
-        if(filteredRecipes.length === 0) { return res.status(200).json('No recipes found.');  }
+        if(filteredRecipes.length === 0) { return res.status(404).json('No recipes found.');  }
         return res.status(200).json(filteredRecipes);
     } catch (error) {
         return res.status(404).json( { error: error.message } );
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
         postRecipe({ name, summary, healthScore, dishTypes, steps, image, diets })
             .then( (recipe) => {
 
-                res.status(201).json(`${recipe.name} was created.`);
+                res.status(201).json(recipe);
             })
     } catch (error) {
         res.status(404).json( { error: error.message } );

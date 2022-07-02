@@ -29,8 +29,7 @@ const rootReducer = (state = initialState, action) => {
             }
         case POST_RECIPE: 
             return {
-                ...state,
-                recipe: { ...action.payload }
+                ...state
             }
         case GET_ALL_RECIPES:
             return {

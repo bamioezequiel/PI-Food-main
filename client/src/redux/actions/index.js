@@ -21,7 +21,7 @@ export const cleanRecipe = () => {
 export const updateRecipe = (recipe) => {
     return async function(dispatch) {
         try {
-          let res = axios.put(`${URL}recipes`, recipe);
+          axios.put(`${URL}recipes`, recipe);
           return dispatch({ type: UPDATE_RECIPE })  
         } catch(error) {
             console.error(error);
@@ -32,8 +32,8 @@ export const updateRecipe = (recipe) => {
 export const deleteRecipe = (id) => {
     return async function(dispatch) {
         try {
-            let res = axios.delete(`${URL}recipes/${id}`); 
-            return dispatch({ type: DELETE_RECIPE, payload: res });
+            axios.delete(`${URL}recipes/${id}`); 
+            return dispatch({ type: DELETE_RECIPE });
         } catch (error) {
             console.error(error);
         }

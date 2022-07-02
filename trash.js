@@ -1,5 +1,31 @@
 /* 
-    Optimizar codigo
+Just create a .babelrc file in the root of your project and add:
+
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+
+import { render } from "@testing-library/react";
+import React from "react";
+import { NavLink } from 'react-router-dom';
+
+export default class NavBar extends React.Component {
+    render() {
+
+    return (
+        <div>
+            <nav>
+                <div> 
+                    <NavLink to='/home'  >Food</NavLink>
+                    <NavLink to='/home'  >Home</NavLink>
+                    <NavLink to='/home/create'  >Create</NavLink>
+                </div>
+            </nav>
+        </div>
+    )
+    }
+}
+   ----------------------
 
     <NavLink to='/home' className={style.back}>Back</NavLink>
 
