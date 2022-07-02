@@ -50,13 +50,13 @@ const rootReducer = (state = initialState, action) => {
                 diets: action.payload
             }
         case FILTER_BY_DIEST:
-            const allRecipes = state.allRecipes;
+            const allRecipes = state.filterRecipes;
             const dietsFilter = (action.payload === 'all') 
                                   ? state.allRecipes 
                                   : allRecipes.filter( (el) => el.diets.includes(action.payload) );
             return {
                 ...state,
-                recipes: dietsFilter
+                recipes: [...dietsFilter]
             }
         case ORDER_RECIPES:
             switch(action.payload) {
@@ -75,7 +75,7 @@ const rootReducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                recipes: state.recipes
+                recipes: [...state.recipes]
             }
         case SEARCH_BY_NAME:
             return {
@@ -85,7 +85,7 @@ const rootReducer = (state = initialState, action) => {
         case CLEAN_RECIPE:
             return {
                 ...state,
-                recipes: state.allRecipes
+                recipes: [...state.allRecipes]
             }
         default:
             return ({ ...state });
