@@ -27,7 +27,7 @@ export default function CreateRecipe() {
     useEffect( () => {
         dispatch(getDiets());
         dispatch(getRecipeById(id));
-    }, [dispatch])
+    }, [dispatch, id])
 
     const handleChange = (e) => {
         setInput({
@@ -202,7 +202,7 @@ const validate = (input) => {
         errors.steps = 'Steps cannot exceed 1000 characters';
     }
 
-    if(!input.healthScore) {
+    if(input.healthScore.length === 0) {
         errors.healthScore = 'The health score is not valid';
     }
     else if(input.healthScore < 0 || input.healthScore > 100) {

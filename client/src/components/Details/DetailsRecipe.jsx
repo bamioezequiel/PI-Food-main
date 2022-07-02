@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteRecipe, getRecipeById, updateRecipe } from './../../redux/actions/index.js';
+import { deleteRecipe, getRecipeById } from './../../redux/actions/index.js';
 import { NavLink } from "react-router-dom";
 import Loading from "../Loading/Loading";
-import Food404 from './../../assets/404Food.png';
 import style from './DetailsRecipe.module.css';
 import Error404 from "../404/Error404.jsx";
 
@@ -35,10 +34,10 @@ export default function DetailsRecipe() {
         {
             recipe.createInDB && <div>
                 <button onClick={ (e) => handleDelete(e) } className={style.btn_delete}>
-                    <img src='https://imgur.com/aj8PEHd.png' alt="delete image not found" />
+                    <img src='https://imgur.com/aj8PEHd.png' alt="delete not found" />
                 </button>
                 <NavLink to={`/home/create/${id}`}  className={style.btn_update}>
-                    <img src="https://imgur.com/qV1MFWh.png" alt="update image not found" />
+                    <img src="https://imgur.com/qV1MFWh.png" alt="update not found" />
                 </NavLink>
             </div>
         }

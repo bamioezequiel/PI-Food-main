@@ -71,6 +71,8 @@ const rootReducer = (state = initialState, action) => {
                 case 'desScore':
                     state.recipes.sort( (a,b) => a.healthScore - b.healthScore );
                 break;
+                default:
+                    return;
             }
             return {
                 ...state,

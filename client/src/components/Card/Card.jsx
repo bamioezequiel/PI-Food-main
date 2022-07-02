@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from 'react-router-dom'
 import TypeDiets from "../TypeDiets/TypeDiets";
 import style from './Card.module.css';
-import Food404 from './../../assets/404Food.png';
 
 export default class Card extends React.Component {
     render() {

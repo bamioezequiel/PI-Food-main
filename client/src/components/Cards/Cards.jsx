@@ -5,7 +5,7 @@ import Pagination from "../Pagination/Pagination.jsx";
 import style from './Cards.module.css';
 
 export default function Cards({ recipes }) {
-    const [render, setRender] = useState('');
+    const [setRender] = useState('');
     const [ currentPage, setCurrentPage ] = useState(1);
     // const [ recipesPage, setRecipesPage] = useState(9);
     const [ recipesPage ] = useState(9);

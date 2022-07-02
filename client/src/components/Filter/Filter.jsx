@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllRecipes, orderRecipes, filterByDiets, getDiets, searchByName, cleanRecipe } from "../../redux/actions";
+import { orderRecipes, filterByDiets, getDiets, cleanRecipe } from "../../redux/actions";
 import Search from "../Search/Search";
 import style from './Filter.module.css';
 
