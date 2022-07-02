@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
     word-wrap: break-word;
 }
@@ -64,7 +65,7 @@
     color: #fff;
 }
 
-.previus_recipe {
+.card_display {
     width: 45%;
     padding: 25px 30px;
 }
@@ -80,7 +81,7 @@
 }
 
 .card img {
-    height: 12rem;
+    height: 15rem;
     width: 100%;
     object-fit: cover;
 }
@@ -113,4 +114,16 @@
     margin-left: 5px;
     font-size: 14px;
     color: #ff0000;
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+    }
+    .form_container {
+        width: 90%;
+    }
+    .display_recipe {
+        width: 90%;
+    }
 }

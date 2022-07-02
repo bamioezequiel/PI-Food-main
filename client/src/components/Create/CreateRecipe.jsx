@@ -73,6 +73,19 @@ export default function CreateRecipe() {
 
     return (
         <div className={style.container}> 
+        <div className={style.card_display}>
+                <div className={style.card}>
+                    <img src={input.image} 
+                    onError={ (e) => e.target.src = 'https://imgur.com/fqmPwAc.png' } 
+                    id='img_create' width='300px' alt={input.name} />
+                    <h3>Name: {input.name}</h3>
+                    <h5>Dish types: {input.dishTypes}</h5>
+                    <span>Health Score: {input.healthScore}</span>
+                    <div className={style.card_textarea}>Summary: {input.summary}</div>
+                    <div className={style.card_textarea}>Steps: {input.steps}</div>
+                    <TypeDiets diets={input.diets} />
+                </div>
+            </div>
             <div className={style.form_container}>
                 <h1 className={style.title}>Create recipe</h1>
                 <form>
@@ -153,19 +166,7 @@ export default function CreateRecipe() {
                         
                 </form>
             </div>
-            <div className={style.previus_recipe}>
-                <div className={style.card}>
-                    <img src={input.image} 
-                    onError={ (e) => e.target.src = 'https://imgur.com/fqmPwAc.png' } 
-                    id='img_create' width='300px' alt={input.name} />
-                    <h3>Name: {input.name}</h3>
-                    <h5>Dish types: {input.dishTypes}</h5>
-                    <span>Health Score: {input.healthScore}</span>
-                    <div className={style.card_textarea}>Summary: {input.summary}</div>
-                    <div className={style.card_textarea}>Steps: {input.steps}</div>
-                    <TypeDiets diets={input.diets} />
-                </div>
-            </div>
+            
         </div>
     )
 }

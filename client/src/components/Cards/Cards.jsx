@@ -11,7 +11,7 @@ export default function Cards({ recipes }) {
     const [ recipesPage ] = useState(9);
     const indexOfLastRecipes = currentPage * recipesPage;
     const indexOfFirstRecipes = indexOfLastRecipes - recipesPage;
-    const currentRecipes = recipes?.slice(indexOfFirstRecipes, indexOfLastRecipes);
+    const currentRecipes = recipes.slice(indexOfFirstRecipes, indexOfLastRecipes);
 
     const pagination = (pageNumber) => {
         setCurrentPage(pageNumber);
