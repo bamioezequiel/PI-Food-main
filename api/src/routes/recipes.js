@@ -26,7 +26,7 @@ router.get('/:idReceta', async (req, res) => {
     let { idReceta } = req.params;
     try {
         const recipe = await getRecipeById(idReceta);
-        if(!recipe) { throw Error('No se encontro la receta.'); }
+        if(!recipe) { throw Error('No recipe found.'); }
         res.json(recipe);
     } catch(error) {
         res.status(404).json( { error: error.message } );
@@ -37,12 +37,12 @@ router.post('/', async (req, res) => {
     let { name, summary, healthScore, dishTypes, steps, image, diets } = req.body;
     try {
         if(!name || !summary) {
-            throw Error('No hay parametros suficientes para hacer esta petición');
+            throw Error('There are not enough parameters to make this request');
         };
         postRecipe({ name, summary, healthScore, dishTypes, steps, image, diets })
             .then( (recipe) => {
 
-                res.status(201).json(`${recipe.name} fue creado.`);
+                res.status(201).json(`${recipe.name} was created.`);
             })
     } catch (error) {
         res.status(404).json( { error: error.message } );
@@ -53,14 +53,14 @@ router.put('/', async (req, res) => {
     let { id, name, summary, healthScore, dishTypes, steps, image, diets } = req.body;
     try {
         if(!id || !name || !summary) {
-            throw Error('No hay parametros suficientes para hacer esta petición');
+            throw Error('There are not enough parameters to make this request');
         }
         console.log(id, diets)
         let updated = await updateRecipe({
             id, name, summary, healthScore, dishTypes, steps, image, diets
         });
         console.log(updated)
-        res.json( (updated.length) ? `Se modificaron ${updated[0]} recetas` : 'No se modificaron recetas' );
+        res.json( (updated.length) ? `${updated[0]} recipes were modified` : 'No recipes changed' );
     } catch(error) {
         res.status(404).json( { error: error.message } );
     }
