@@ -17,6 +17,13 @@ describe('Recipe model', () => {
       it('should work when its a valid name', () => {
         Recipe.create({ name: 'Milanesa a la napolitana' });
       });
+      it('should not create the Recipe if summary or name is not a valid option', async () => {
+        try {
+          await Recipe.create({name: 'Test', summary: '', dishTypes: 'lorem', steps: 'loremloremlorem', healthScore: 150, image: ''});
+        } catch (error) {
+          expect(error.message).toBeDefined();
+        }
+      });
     });
   });
 });
