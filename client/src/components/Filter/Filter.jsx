@@ -54,18 +54,18 @@ export default function Filter({ pagination, setRender }) {
 
                 <Search pagination={pagination} cleanSelector={cleanSelector} />
 
-                <select onChange={ (e) => handlerFilterByDiets(e) } id='select-diets' className={style.filter}  >
+                <select onChange={ (e) => handlerFilterByDiets(e) } id='select-diets' className={style.filter}>
                     <option value='all'>All</option>
                     {
                         diets?.map( (el) => {
-                            return <option key={el.id} value={el.name}>{el.name}</option>
+                            return <option key={el.id} value={el.name}>{ el.name }</option>
                         })
                     }
                 </select>
             </div>
             
             <div className={style.container_btn_clean}>
-                <button onClick={ (e) => handlerClean(e) } className={style.btn_clean}  >Clear</button>
+                <button onClick={ (e) => handlerClean(e) } className={style.btn_clean}>Clear</button>
             </div>
         </div>
     )

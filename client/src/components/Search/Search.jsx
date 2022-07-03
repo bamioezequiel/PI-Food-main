@@ -8,11 +8,18 @@ export default function Search({ pagination, cleanSelector }) {
 
     const dispatch = useDispatch();
     const [value, setValue] = useState('');
+    
     const handleSearch = (e) => {
         e.preventDefault();
         setValue(e.target.value);
     }
-    
+
+    const handleKeyDown = (e) => {
+        if(e.keyCode === 13) {
+            handleSubmit(e);
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(value !== '') {
@@ -20,12 +27,6 @@ export default function Search({ pagination, cleanSelector }) {
             pagination(1);
             cleanSelector();
             setValue('');
-        }
-    }
-
-    const handleKeyDown = (e) => {
-        if(e.keyCode === 13) {
-            handleSubmit(e);
         }
     }
 
@@ -45,7 +46,7 @@ export default function Search({ pagination, cleanSelector }) {
                             <button type='submit'
                                     onClick={ (e) => handleSubmit(e) }
                                     className={style.button_icon}>
-                                <img src={icon} className={style.icon} alt='icon search not found' />
+                                <img src={icon} className={style.icon} alt='search not found' />
                             </button>
                         </td>
                     </tr>

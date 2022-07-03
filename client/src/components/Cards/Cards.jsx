@@ -7,8 +7,8 @@ import style from './Cards.module.css';
 export default function Cards({ recipes }) {
     const [setRender] = useState('');
     const [ currentPage, setCurrentPage ] = useState(1);
-    // const [ recipesPage, setRecipesPage] = useState(9);
-    const [ recipesPage ] = useState(9);
+    const recipesPage = 9;
+    // const [ recipesPage ] = useState(9);
     const indexOfLastRecipes = currentPage * recipesPage;
     const indexOfFirstRecipes = indexOfLastRecipes - recipesPage;
     const currentRecipes = recipes.slice(indexOfFirstRecipes, indexOfLastRecipes);
@@ -21,17 +21,25 @@ export default function Cards({ recipes }) {
         <React.Fragment>
             <Filter pagination={pagination} setRender={setRender} />
             {
-                    <div className={style.container}>
+                <div className={style.container}>
                     {
-                        currentRecipes.length && <Pagination currentPage={currentPage} recipesPage={recipesPage} recipes={recipes.length} pagination={pagination} />
+                        currentRecipes.length && <Pagination currentPage={currentPage}
+                                                             recipesPage={recipesPage} 
+                                                             recipes={recipes.length} 
+                                                             pagination={pagination} />
                     }
                     <div className={style.cards}>
                     {
                         (currentRecipes.length > 0) 
-                        ? currentRecipes?.map( (el) => {
-                            return <Card key={el.id} id={el.id} name={el.name} image={el.image} healthScore={el.healthScore} diets={el.diets}/>
-                        })
-                        : <h2>No recipes available</h2>
+                            ? currentRecipes?.map( (el) => {
+                                return <Card key={el.id} 
+                                             id={el.id} 
+                                             name={el.name} 
+                                             image={el.image} 
+                                             healthScore={el.healthScore} 
+                                             diets={el.diets}/>
+                            })
+                            : <h2>No recipes available</h2>
                     }
                     </div> 
                 </div>

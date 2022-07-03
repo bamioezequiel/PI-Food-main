@@ -20,7 +20,7 @@ export default function Home() {
                 {
                    (loading) 
                    ? <Loading /> 
-                   : <Cards recipes={(allRecipes.length) ? allRecipes : []} />
+                   : <Cards recipes={ (allRecipes.length) ? allRecipes : [] } />
                 }
             </div>  
         </div>

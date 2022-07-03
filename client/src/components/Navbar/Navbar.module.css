@@ -40,6 +40,10 @@
     width: 60%;
 }
 
+.item_create:hover:after {
+    width:75%;
+}
+
 .logo:hover,
 .item:hover {
     color: #fbb304;
