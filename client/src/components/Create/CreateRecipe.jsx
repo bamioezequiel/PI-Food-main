@@ -72,7 +72,7 @@ export default function CreateRecipe() {
                     dispatch(updateRecipe(input));
                     alert(`Recipe was updated successfully`);
                 } else {
-                    alert('error');//mejorar mensaje
+                    alert('Error, it is not allowed to do this action');
                 }
             } else {
                 dispatch(postRecipe(input));
