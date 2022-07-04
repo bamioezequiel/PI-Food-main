@@ -6,6 +6,7 @@ import LandingPage from './components/LandingPage/LandingPage.jsx';
 import NavBar from './components/Navbar/Navbar.jsx';
 import Home from './components/Home/Home.jsx';
 import './App.css';
+import Error404 from './components/Error404/Error404.jsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/home' component={Home} />
         <Route path='/home/update/:id' component={CreateRecipe} />
         <Route path='/home/create' component={CreateRecipe} />
+        <Route exact path='*' component={Error404} />
       </Switch>
     </React.Fragment>
   );

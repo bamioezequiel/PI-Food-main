@@ -25,7 +25,9 @@ export default function CreateRecipe() {
     
     useEffect( () => {
         dispatch(getDiets());
-        dispatch(getRecipeById(id));
+        if(id) {
+            dispatch(getRecipeById(id));
+        }
     }, [dispatch, id])
 
     const handleChange = (e) => {
