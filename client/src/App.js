@@ -15,7 +15,7 @@ function App() {
         <Route exact path='/' component={LandingPage} />
         <Route path='/home/recipe/:id' component={DetailsRecipe} />
         <Route exact path='/home' component={Home} />
-        <Route path='/home/create/:id' component={CreateRecipe} />
+        <Route path='/home/update/:id' component={CreateRecipe} />
         <Route path='/home/create' component={CreateRecipe} />
       </Switch>
     </React.Fragment>
