@@ -81,7 +81,7 @@ const rootReducer = (state = initialState, action) => {
         case SEARCH_BY_NAME:
             return {
                 ...state,
-                recipes: (typeof action.payload === 'string') ? [] : action.payload   
+                recipes: action.payload  
             }
         case CLEAN_RECIPE:
             return {

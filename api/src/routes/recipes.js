@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
                 ? res.status(200).json(filteredRecipes)
                 : res.status(404).json('No recipes found.');
     } catch (error) {
+        console.log(error)
         return res.status(404).json( { error: error.message } );
     }
 });

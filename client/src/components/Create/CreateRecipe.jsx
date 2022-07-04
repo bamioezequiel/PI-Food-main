@@ -6,7 +6,6 @@ import { getDiets, getRecipeById, postRecipe, updateRecipe } from './../../redux
 import style from './CreateRecipe.module.css';
 
 export default function CreateRecipe() {
-    //put
     const { id } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -61,7 +60,7 @@ export default function CreateRecipe() {
             alert('Error in required fields');
         } else {
             if(id) {
-                dispatch(updateRecipe(input)) 
+                dispatch(updateRecipe(input));
                 alert(`Recipe was updated successfully`);
             } else {
                 dispatch(postRecipe(input));

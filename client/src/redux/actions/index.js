@@ -104,7 +104,7 @@ export const searchByName = (value) => {
             const res = await axios.get(`${URL}recipes?name=${value}`);
             return dispatch({ type: SEARCH_BY_NAME, payload: res.data });
         } catch(error) {
-            console.error(error);
+            return dispatch({ type: SEARCH_BY_NAME, payload: [] });
         }
     }
 }
