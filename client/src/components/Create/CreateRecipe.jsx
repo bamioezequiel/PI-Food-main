@@ -12,7 +12,7 @@ export default function CreateRecipe() {
     const diets = useSelector( (state) => state.diets );
     const recipeUpdate = useSelector( (state) => state.recipe );
     const [errors, setErrors] = useState({});
-    const [input, setInput] = useState((id) ? recipeUpdate : {
+    const [input, setInput] = useState({
         name: '',
         summary: '',
         healthScore: 0,
@@ -22,6 +22,12 @@ export default function CreateRecipe() {
         diets: []
     });
  
+    useEffect( () => {
+        if(Object.keys(recipeUpdate).length) {
+            setInput(recipeUpdate);
+        }
+
+    }, [recipeUpdate]);
     
     useEffect( () => {
         dispatch(getDiets());
@@ -62,8 +68,12 @@ export default function CreateRecipe() {
             alert('Error in required fields');
         } else {
             if(id) {
-                dispatch(updateRecipe(input));
-                alert(`Recipe was updated successfully`);
+                if(recipeUpdate.createInDB) {
+                    dispatch(updateRecipe(input));
+                    alert(`Recipe was updated successfully`);
+                } else {
+                    alert('error');//mejorar mensaje
+                }
             } else {
                 dispatch(postRecipe(input));
                 alert(`Recipe was created successfully`);
@@ -180,36 +190,36 @@ const validate = (input) => {
     if(!input.name) {
         errors.name = 'Name cannot be empty';
     }
-    else if(input.name.length > 100) {
+    else if(input.name?.length > 100) {
         errors.name = 'Name cannot be more than 100 characters';
     }
 
-    if(input.image.length > 150) { 
+    if(input.image?.length > 150) { 
         errors.image = 'Image cannot be more than 150 characters';
     }
 
-    if(input.dishTypes.length > 100) {
+    if(input.dishTypes?.length > 100) {
         errors.dishTypes = 'Dish types cannot be more than 100 characters';
     }
 
     if(!input.summary) {
         errors.summary = 'Summary cannot be empty';
     }
-    else if(input.summary.length > 700) {
+    else if(input.summary?.length > 700) {
         errors.summary = 'Summary cannot exceed 700 characters';
     }
 
-    if(input.steps.length > 1000) {
+    if(input.steps?.length > 1000) {
         errors.steps = 'Steps cannot exceed 1000 characters';
     }
 
-    if(input.healthScore.length === 0) {
+    if(input.healthScore?.length === 0) {
         errors.healthScore = 'The health score is not valid';
     }
     else if(input.healthScore < 0 || input.healthScore > 100) {
         errors.healthScore = 'The health score cannot be less than 0 or greater than 100';
     }
-    else if(input.healthScore.toString().includes('.')) {
+    else if(input.healthScore?.toString().includes('.')) {
         errors.healthScore = 'The health score cannot be a decimal number';
     }
     

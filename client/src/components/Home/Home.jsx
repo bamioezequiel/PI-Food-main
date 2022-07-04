@@ -9,9 +9,15 @@ export default function Home() {
     const dispatch = useDispatch();
     const allRecipes = useSelector( (state) => state.recipes );
     const [loading, setLoading] = useState(true);
-    useEffect( async () => {
-        await dispatch(getAllRecipes());
-        setLoading(false);
+
+    useEffect( () => {
+        if(allRecipes.length) {
+            setLoading(false);
+        }
+    }, [allRecipes]);
+
+    useEffect( () => {
+       dispatch(getAllRecipes());
     }, [dispatch]);
 
     return (
