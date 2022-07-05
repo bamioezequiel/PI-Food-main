@@ -21,7 +21,7 @@ export default function CreateRecipe() {
         image: '',
         diets: []
     });
- 
+
     useEffect( () => {
         if(Object.keys(recipeUpdate).length) {
             setInput(recipeUpdate);
@@ -33,6 +33,16 @@ export default function CreateRecipe() {
         dispatch(getDiets());
         if(id) {
             dispatch(getRecipeById(id));
+        } else {
+            setInput({
+                name: '',
+                summary: '',
+                healthScore: 0,
+                dishTypes: '',
+                steps: '',
+                image: '',
+                diets: []
+            })
         }
     }, [dispatch, id])
 

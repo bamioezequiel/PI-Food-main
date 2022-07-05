@@ -21,9 +21,11 @@ export default function DetailsRecipe() {
 
     const handleDelete = (e) => {
         e.preventDefault();
-        dispatch(deleteRecipe(recipe.id));
-        alert(`Recipe was deleted successfully`);
-        history.push('/home');
+        if(window.confirm('Are you sure you want to delete the recipe?')) {
+            dispatch(deleteRecipe(recipe.id));
+            alert(`Recipe was deleted successfully`);
+            history.push('/home');
+        }
     }
      
    return (
