@@ -39,7 +39,7 @@ export default function Cards({ recipes }) {
                                              healthScore={el.healthScore} 
                                              diets={el.diets}/>
                             })
-                            : <h2>No recipes available</h2>
+                            : <h2>No recipes available</h2> 
                     }
                     </div> 
                 </div>
