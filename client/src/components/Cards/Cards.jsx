@@ -23,7 +23,7 @@ export default function Cards({ recipes }) {
             {
                 <div className={style.container}>
                     {
-                        currentRecipes.length && <Pagination currentPage={currentPage}
+                        (currentRecipes.length > 0) && <Pagination currentPage={currentPage}
                                                              recipesPage={recipesPage} 
                                                              recipes={recipes.length} 
                                                              pagination={pagination} />

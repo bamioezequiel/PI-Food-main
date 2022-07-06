@@ -94,7 +94,7 @@ export default function CreateRecipe() {
 
     return (
         <div className={style.container}> 
-        <div className={style.card_display}>
+            <div className={style.card_display}>
                 <div className={style.card}>
                     <img src={input.image} 
                     onError={ (e) => e.target.src = 'https://imgur.com/fqmPwAc.png' } 
@@ -189,8 +189,7 @@ export default function CreateRecipe() {
                     }
                         
                 </form>
-            </div>
-            
+            </div> 
         </div>
     )
 }
