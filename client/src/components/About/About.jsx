@@ -43,7 +43,7 @@ export default function About() {
                         CSS,
                         Node Js,
                         Express,
-                        Postgress,
+                        PostgreSQL,
                         Sequelize
                     </div>
                     <div className={style.social}>
@@ -76,7 +76,7 @@ export default function About() {
                     CSS,
                     Node Js,
                     Express,
-                    Postgress,
+                    PostgreSQL,
                     Sequelize
                 </div>
                 <div className={style.social}>
