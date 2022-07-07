@@ -90,25 +90,27 @@ const updateRecipe = async (recipe) => {
 }
 
 const postRecipe = async ({name, summary, healthScore, dishTypes, steps, image, diets}) => {
-    // let [recipe, row] = await Recipe.findOrCreate({
-    //     where: {
-    //         name,
-    //         summary,
-    //         healthScore,
-    //         dishTypes,
-    //         steps,
-    //         image
-    //     }
-    // });
-    // if(!row) { return [undefined, row] };
-    let recipe = await Recipe.create({
-        name,
-        summary,
-        healthScore,
-        dishTypes,
-        steps,
-        image
+    let [recipe, created] = await Recipe.findOrCreate({
+        where: {
+            name
+        },
+        defaults: {
+            summary,
+            healthScore,
+            dishTypes,
+            steps,
+            image
+        }
     });
+    if(!created) { throw Error('The recipe already exists.'); };
+    // let recipe = await Recipe.create({
+    //     name,
+    //     summary,
+    //     healthScore,
+    //     dishTypes,
+    //     steps,
+    //     image
+    // });
     let dietsDB = await Diet.findAll({
         where: { name: diets },
     });

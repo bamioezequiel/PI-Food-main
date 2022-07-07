@@ -9,7 +9,7 @@ export default function Home() {
     const dispatch = useDispatch();
     const allRecipes = useSelector( (state) => state.recipes );
     const [loading, setLoading] = useState(true);
-
+    
     useEffect( () => {
         if(allRecipes.length) {
             setLoading(false);

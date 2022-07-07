@@ -85,8 +85,13 @@ export default function CreateRecipe() {
                     alert('Error, it is not allowed to do this action');
                 }
             } else {
-                dispatch(postRecipe(input));
-                alert(`Recipe was created successfully`);
+                try {
+                    let { response } = await dispatch(postRecipe(input));
+                    alert(`Recipe was created successfully`);
+
+                } catch(error) {
+                    { alert('The recipe already exists.'); }
+                }
             }
             history.push('/home');
         }
