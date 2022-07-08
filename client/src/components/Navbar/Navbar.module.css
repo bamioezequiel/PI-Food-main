@@ -6,6 +6,8 @@
     width: 100%;
     background-color: #192024;
     font-weight: bold;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .items {
