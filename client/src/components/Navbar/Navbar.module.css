@@ -60,3 +60,13 @@
     cursor: pointer;
     transition: all ease-in-out 250ms;
 }
+
+@media (max-width: 600px) {
+    .logo {
+        position: absolute;
+        display: none;
+    }
+    .items {
+        justify-content: center;
+    }
+}

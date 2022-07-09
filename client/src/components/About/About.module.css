@@ -118,3 +118,14 @@
     opacity: 80;
 }
     
+@media (max-width: 600px) {
+    .container_about {
+        width: 95%;
+    }
+    .lenguage {
+        left: 300px;
+    }
+    .tech_list {
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
+    }
+}
