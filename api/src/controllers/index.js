@@ -24,7 +24,7 @@ const getApiRecipes = async (amount = 100) => {
 let i = 1;
 const validateApiKey = async (amount) => {
     let API_KEY = process.env.API_KEY;
-    for(let i = 1; i <= 20; i++) {
+    for(let i = 1; i <= 27; i++) {
         try {
             let apiInfo = await axios.get(`${URL}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${amount}`);
             return apiInfo;
