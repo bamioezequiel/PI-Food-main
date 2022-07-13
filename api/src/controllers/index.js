@@ -1,12 +1,12 @@
 require('dotenv').config();
-const { API_KEY } = process.env;
+// const { API_KEY } = process.env;
 const axios = require('axios');
 const { Recipe, Diet } = require('./../db.js');
 
 const URL = 'https://api.spoonacular.com/recipes';
 
 const getApiRecipes = async (amount = 100) => {
-    const apiInfo = await axios.get(`${URL}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${amount}`);
+    const apiInfo = await axios.get(`${URL}/complexSearch?apiKey=${await validateApiKey()}&addRecipeInformation=true&number=${amount}`);
     const apiRecipes = await apiInfo.data.results.map( (el) => {
         return { 
             id:             el.id,
@@ -20,6 +20,18 @@ const getApiRecipes = async (amount = 100) => {
         };
     });
     return apiRecipes;
+}
+let i = 1;
+const validateApiKey = async () => {
+    let API_KEY = process.env.API_KEY;
+    for(let i = 1; i <= 20; i++) {
+        try {
+            await axios.get(`${URL}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${10}`);
+            return API_KEY;
+        } catch (error) {
+            API_KEY = process.env[`API_KEY${i}`];
+        }
+    }
 }
 
 const getBDRecipes = async () => {
@@ -122,7 +134,7 @@ const postRecipe = async ({name, summary, healthScore, dishTypes, steps, image, 
 /* ------------------------------------------- */
 
 const getDBDiets = async () => {
-    const apiInfo = await axios.get(`${URL}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
+    const apiInfo = await axios.get(`${URL}/complexSearch?apiKey=${await validateApiKey()}&addRecipeInformation=true&number=100`);
     let apiDiets = apiInfo.data.results.map( (el) => el.diets );
     apiDiets = [...new Set(apiDiets.flat()), 'vegetarian'];
 
