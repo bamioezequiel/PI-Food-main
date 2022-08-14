@@ -28,10 +28,10 @@ const validateApiKey = async (amountRecipes) => {
     for(let i = 1; i <= amountKeys; i++) {
         try {
             let apiInfo = await axios.get(`${URL}/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${amountRecipes}`);
-            // console.log('key actual', API_KEY);
+            console.log('key actual', API_KEY);
             return apiInfo;
         } catch (error) {
-            // console.log('key vencida', API_KEY)
+            console.log('key vencida', API_KEY)
             API_KEY = process.env[`API_KEY${i}`];
         }
     }
