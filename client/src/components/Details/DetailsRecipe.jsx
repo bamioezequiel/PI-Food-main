@@ -33,13 +33,15 @@ export default function DetailsRecipe() {
         }).then(async (result) => {
             if (result.isConfirmed) {
               dispatch(deleteRecipe(recipe.id));
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Recipe was deleted successfully.',
+                showConfirmButton: false,
+                timer: 2000
+            })
               await dispatch(getAllRecipes());
               history.push('/home');
-              Swal.fire(
-                'Deleted!',
-                'Recipe was deleted successfully.',
-                'success'
-              )
             }
         })
     }
