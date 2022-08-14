@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteRecipe, getRecipeById } from './../../redux/actions/index.js';
 import { NavLink } from "react-router-dom";
+import Swal from 'sweetalert2';
 import Loading from "../Loading/Loading";
 import style from './DetailsRecipe.module.css';
 import Error404 from "../Error404/Error404.jsx";
@@ -21,11 +22,25 @@ export default function DetailsRecipe() {
 
     const handleDelete = (e) => {
         e.preventDefault();
-        if(window.confirm('Are you sure you want to delete the recipe?')) {
-            dispatch(deleteRecipe(recipe.id));
-            alert(`Recipe was deleted successfully`);
-            history.push('/home');
-        }
+        Swal.fire({
+            title: 'Are you sure you want to delete the recipe?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#fbb304',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+              dispatch(deleteRecipe(recipe.id));
+              history.push('/home');
+              Swal.fire(
+                'Deleted!',
+                'Recipe was deleted successfully.',
+                'success'
+              )
+            }
+        })
     }
      
    return (

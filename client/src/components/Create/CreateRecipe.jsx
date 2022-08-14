@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import TypeDiets from "../TypeDiets/TypeDiets.jsx";
 import { getDiets, getRecipeById, postRecipe, updateRecipe } from './../../redux/actions/index.js';
+import Swal from 'sweetalert2';
 import style from './CreateRecipe.module.css';
 
 export default function CreateRecipe() {
@@ -75,22 +76,57 @@ export default function CreateRecipe() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(!input.name && !input.summary) {
-            alert('Error in required fields');
+            // alert('Error in required fields');
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Error in required fields.',
+                showConfirmButton: false,
+                timer: 2000
+            })
         } else {
             if(id) {
                 if(recipeUpdate.createInDB) {
                     dispatch(updateRecipe(input));
-                    alert(`Recipe was updated successfully`);
+                    // alert(`Recipe was updated successfully`);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Recipe was updated successfully.',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 } else {
-                    alert('Error, it is not allowed to do this action');
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'It is not allowed to do this action.',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    // alert('Error, it is not allowed to do this action');
                 }
             } else {
                 try {
                     let { response } = await dispatch(postRecipe(input));
-                    alert(`Recipe was created successfully`);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Recipe was created successfully.',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    // alert(`Recipe was created successfully`);
 
                 } catch(error) {
-                    { alert('The recipe already exists.'); }
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Recipe was created successfully.',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    // { alert('The recipe already exists.'); }
                 }
             }
             history.push('/home');
