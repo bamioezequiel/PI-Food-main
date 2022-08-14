@@ -24,6 +24,8 @@ server.use((req, res, next) => {
   next();
 });
 
+server.use(cors({origin: '*'}))
+
 server.use('/recipes', recipes);
 server.use('/diets', diets);
 

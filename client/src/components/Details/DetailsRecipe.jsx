@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteRecipe, getRecipeById } from './../../redux/actions/index.js';
+import { deleteRecipe, getAllRecipes, getRecipeById } from './../../redux/actions/index.js';
 import { NavLink } from "react-router-dom";
 import Swal from 'sweetalert2';
 import Loading from "../Loading/Loading";
@@ -30,9 +30,10 @@ export default function DetailsRecipe() {
             confirmButtonColor: '#fbb304',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
               dispatch(deleteRecipe(recipe.id));
+              await dispatch(getAllRecipes());
               history.push('/home');
               Swal.fire(
                 'Deleted!',
