@@ -129,7 +129,7 @@ export default function CreateRecipe() {
                     // { alert('The recipe already exists.'); }
                 }
             }
-            dispatch(getAllRecipes());
+            await dispatch(getAllRecipes());
             history.push('/home');
         }
     }
