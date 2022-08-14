@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import TypeDiets from "../TypeDiets/TypeDiets.jsx";
-import { getDiets, getRecipeById, postRecipe, updateRecipe } from './../../redux/actions/index.js';
+import { getAllRecipes, getDiets, getRecipeById, postRecipe, updateRecipe } from './../../redux/actions/index.js';
 import Swal from 'sweetalert2';
 import style from './CreateRecipe.module.css';
 
@@ -129,6 +129,7 @@ export default function CreateRecipe() {
                     // { alert('The recipe already exists.'); }
                 }
             }
+            dispatch(getAllRecipes());
             history.push('/home');
         }
     }
