@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const recipes = require('./routes/recipes.js');
 const diets = require('./routes/diets.js');
+const cors = require('cors');
 
 require('./db.js');
 
